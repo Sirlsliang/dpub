@@ -1,0 +1,36 @@
+Django中模型的FieldType：（^表示必选参数）
+	AutoFieldy(**options)
+	BigIntegerField(**options)
+	BinaryField(**options)
+	BooleanField(**options)
+	CharField(^max_length,**options)
+	CommaSeparatedIntegerField(^max_length=None,**options)
+	DateField(auto_now=False,auto_now_add=False,**options)
+	DateTimeField(auto_now=False,auto_now_add=False,**options)
+	DecimalField(max_digits=None,decimal_places=None,**options)
+	DurationField(**options)
+	EmailField(^max_length=254,**options)
+	FileField(upload_to=None,max_length=100,**options)	
+	FilePathField(path=None,match=None,recursive=False,max_length=100,**options)
+	FloatField(**options)
+	ImageField(upload_to=None,height_field=None,width_field=None,max_length=100,**options)
+	IntegerField(**options)
+	IPAddressField(**options)
+	GenericIPAddressField(^protocol='both',unpack_ipv4=False,**options)
+	NullBooleanField(**options)
+	PositiveIntegerField(**options)
+	PositiveSmallIntegerField(**options)
+	SlugField(^max_length=50,**options)
+	SmallIntegerField(**options)
+	TextField(**options)
+	TimeField(auto_now=False,auto_now_add=False,**options)
+	URLField(max_length=200,**options)
+	UUIDFiekld(**options)
+
+Relationship fields:
+	ForeignKey(^otherModel,**options)
+	ManyToManyField(othermodel,**options)
+	OneToOneField(otehrmodel,parent_link=False,**options)
+	
+	
+	

@@ -1,0 +1,205 @@
+p {
+	padding:0;
+	margin:0;
+}
+
+.am-container, .am-g-fixed {
+	max-width: 1228px;
+}
+
+/*nav*/
+.logo-icon {
+	height: 40px;
+	padding-bottom: 5px;
+}
+
+@media (max-width: 808px) {
+	.icon-text {
+		display: none;
+	}
+}
+
+/*banner*/
+.banner {
+	background: #21a4d5;
+	color:#fff;
+	text-align: center;
+	padding: 100px 0;
+}
+
+.banner .get-title {
+	font-size: 200%;
+	border:2px solid #fff;
+	padding: 20px;
+	display: inline-block;
+}
+
+/*detail*/
+.detail {
+	margin-top: 42px;
+}
+
+.detail-box {
+	width: 18%;
+	text-align: center;
+	color: #9e9d9d;
+	font-size: 1.8rem;
+	float: left;
+	margin-right: 2%;
+	margin-top: 20px;
+}
+.detail-box:nth-of-type(5) {
+	margin-right: 0;
+}
+
+@media(max-width: 640px) {
+	.detail-box {
+		width: 25%;
+		margin-left: 4%;
+	}
+}
+
+.img {
+	width: 100%;
+}
+
+.img img {
+	width: 90%;
+	cursor: pointer;
+}
+
+.detail-title {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.classify {
+	width: 100%;
+	min-height: 220px;
+	background: #befdf7;
+	position: relative;
+	padding-top: 20px;
+	color:#0b877b;
+	display: none;
+	opacity: 0;
+	transition:opacity 0.7s linear;
+}
+
+.web {
+	background: #c1e5fb;
+}
+.web a {
+	color: #5a707d;
+}
+
+.mobile {
+	background: #83ddfc;
+}
+.mobile a {
+	color: #366372;
+}
+
+.media {
+	background: #9cd6f4;
+}
+.meida a {
+	color: #425e6c;
+}
+
+.game {
+	background: #dce7f9;
+}
+.game a {
+	color: #575e69;
+}
+
+.classify p {
+	padding-bottom: 20px;
+}
+
+.arrow {
+	width: 0;
+	height: 0;
+	border-top:5px solid transparent;
+	border-right:10px solid #fff;
+	border-bottom: 5px solid transparent;
+	position:absolute;
+	top: 40px;
+	right: 0;
+}
+
+/*pic*/
+.pic {
+	margin-top: 30px;
+}
+.pic img {
+	width: 100%;
+}
+
+.line2 {
+	margin-top: 15px;
+}
+
+/*news*/
+.news {
+	padding:40px 0;
+}
+
+.news-box {
+	border-bottom: 1px dashed #000;
+	padding-bottom: 10px;
+}
+
+.news-title {
+	text-align: center;
+	color:#50ad0e;
+	font-family: serif;
+	font-size: 4.2rem;
+	border-bottom: 1px solid #e5e3e3;
+}
+
+.en-title {
+	color:#c6c6c6;
+	font-size: 3.2rem;
+}
+
+.image {
+	float: left;
+	width: 30%;
+}
+
+.image img {
+	width: 100%;
+}
+
+.text {
+	float: left;
+	width: 70%;
+	padding-left: 10px;
+}
+
+.text-title {
+	margin-bottom: 5px;
+	color:#419cc1;
+	font-size: 1.8rem;
+}
+
+.text p {
+	font-size: 1.5rem;
+}
+
+.down {
+	margin-top: 10px;
+}
+
+.footer p {
+	text-align: center;
+	background: #2d3e50;
+	padding:30px 0 50px 0;
+	color: #7f8c8d;
+	vertical-align: middle;
+}
+
+.footer p a {
+	color:#7f8c8d;
+}
