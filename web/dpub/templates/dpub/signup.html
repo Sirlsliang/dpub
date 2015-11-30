@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="author" content="rockhentai">
+	<link rel="icon" href="img/logo.png">
+	<title>登陆</title>
+	<link rel="stylesheet" href="css/amazeui.min.css"/>
+	<link rel="stylesheet" href="css/index.css">
+	<style>
+	.header {
+		position: relative;
+		width: 100%;
+		height: 323px;
+		background: #21a4d5;
+	}
+
+	.header .logo {
+		position: absolute;
+		z-index: 9999;
+		top: 70px;
+		left: 136px;
+		display: inline-block;
+		width: 179px;
+		height: 133px;
+		color: #fff;
+		text-align: center;
+		font-size: 1.6rem;
+	}
+	
+	.content-box {
+		width: 556px;
+		margin:-168px auto 0 auto;
+		background: #fff;
+		border-radius: 2px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.09);
+		display: table;
+		position: relative;
+		z-index: 1;
+	}
+
+	.content-box:before,.content-box:after {
+		content: "";
+		position: absolute;
+		z-index: 3;
+		bottom: -2px;
+		right: -2px;
+		display: block;
+		width: 0;
+		border-width: 8px;
+		border-style: solid;
+		border-color:#f1f1f1 #fff #fff #f1f1f1;
+		border-radius:3px 0 0;
+	}
+
+	.register-form {
+		padding:30px 20px 10px 20px;
+		text-align: center;
+	}
+
+	.slogan {
+		margin-top: 50px;
+		text-align: center;
+		color: #d1d1d1;
+	}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<a href="index.html" class="logo">
+			<img src="img/logo2.png" alt="">
+			数字网最牛逼
+		</a>
+	</div>
+	<div class="content-box">
+		<div class="register-form">
+			<form action="" method="POST" id="signupForm" class="am-form" data-am-validator>
+				<fieldset>
+					<legend>登陆数字网</legend>
+					<div class="am-form-group">
+						<label for="username">用户名</label>
+						<input type="text" id="username" minlength="3" placeholder="请输入用户名/邮箱" required/>
+					</div>
+					<div class="am-form-group">
+						<label for="password">密码</label>
+						<input type="password" id="password" placeholder="请输入密码" pattern="^\w{6,}$" data-foolish-msg="请填写密码" required/>
+						<a href="#" class="fg-psw">忘记密码？</a>
+					</div>
+					<button class="am-btn am-btn-primary" type="submit">立即登陆</button>
+					<div class="go-reg">
+						<p>还没有数字网账号？<a href="#">立即注册 <span class="am-icon-arrow-circle-right"></span></a></p>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div class="footer">
+		<h4 class="slogan">—— 专注数字出版 ——</h4>
+	</div>
+</body>
+</html>

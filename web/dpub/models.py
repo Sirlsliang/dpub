@@ -1,11 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
-class User(models.Model):
-    userName = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    email    = models.EmailField(max_length=50)
+class Exuser(models.Model):
+    IDENTITY = (('1','1'),('0','0'),)
+    user = models.OneToOneField(User)
+    identity = models.CharField(max_length=2,choices=IDENTITY,default='0')
     inTime   = models.DateTimeField(auto_now=True,auto_now_add=False)
     
 
@@ -19,3 +20,11 @@ class School(models.Model):
 class Course(models.Model):
     courName = models.CharField(max_length=50)
     school   = models.ForeignKey(School)
+
+class ServiceModel(models.Model):
+    modelName = models.CharField(max_length=50)
+    modelImg = models.ImageField(upload_to='img/indexModel',null=True,blank=True)
+
+class ClassModel(models.Model):
+    className = models.CharField(max_length=50)
+    modelName = models.ForeignKey(ServiceModel,related_name="classModel")

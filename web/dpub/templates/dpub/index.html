@@ -6,219 +6,293 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="author" content="rockhentai">
-	<link rel="icon" href="">
+	<link rel="icon" href="{% static 'img/logo.png'%}">
 	<title>首页</title>
 	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'css/polls/index.css' %}">
+	<link rel="stylesheet" href="{% static 'css/index/index.css' %}">
 </head>
 <body>
 	<div class="am-topbar am-topbar-fixed-top">
 		<div class="am-container">
 			<a class="am-topbar-brand">
-			<img src="{% static 'img/polls/logo.png' %}" alt="" class="logo-icon">
-			<span>数字资源加工平台</span>
-		</a>
-		<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only am-collapsed" data-am-collapse="{target:'#collapse-head'}">
-			<span class="am-sr-only">导航切换</span>
-			<span class="am-icon-bars"></span>
-		</button>
-		<div class="am-collapse am-topbar-collapse" id="collapse-head">
-			<ul class="am-nav am-nav-pills am-topbar-nav">
-				<li class="am-active">
-					<a href="#">首页</a>
-				</li>
-				<li class="am-dropdown" data-am-dropdown>
-					<a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
-						服务分类 <span class="am-icon-caret-down"></span>
-					</a>
-					<ul class="am-dropdown-content">
-						<li><a href="#">平面设计</a></li>
-						<li><a href="#">网站建设</a></li>
-						<li><a href="#">移动开发</a></li>
-						<li><a href="#">影视影音</a></li>
-						<li><a href="#">动漫游戏</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">需求信息</a>
-				</li>
-				<li>
-					<a href="#">服务商</a>
-				</li>
-				<li>
-					<a href="#">关于我们</a>
-				</li>
-			</ul>
-			<div class="am-topbar-right">
-				<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" id="login">
-					<span class="am-icon-pencil"></span> <span class="icon-text">注册</span>
-				</button>
-			</div>
-			<div class="am-topbar-right">
-				<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" id="signup">
-					<span class="am-icon-user"></span> <span class="icon-text">登陆</span>
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="banner">
-	<div class="am-g">
-		<div class="am-u-lg-12">
-			<h1 class="get-title">R-Star 数字资源加工平台</h1>
-			<p>期待你的参与，咱们的平台就是这么牛逼！</p>
-		</div>
-	</div>
-</div>
-<div class="detail">
-	<div class="am-g am-container" id="detail">
-		<div class="detail-box">
-			<div class="img">
-				<img src="{% static 'img/polls/plain.png' %}" alt="">
-			</div>
-			<p class="detail-title">平面设计</p>
-			<div class="classify plain">
-				<p><a href="#">书籍排版</a></p>
-				<p><a href="#">封面设计</a></p>
-				<p><a href="#">扉页设计</a></p>
-				<p><a href="#">电子书制作</a></p>
-				<div class="arrow"></div>
-			</div>
-		</div>
-		<div class="detail-box">
-			<div class="img">
-				<img src="{% static 'img/polls/web.png' %}" alt="">
-			</div>
-			<p class="detail-title">网站建设</p>
-			<div class="classify web">
-				<p><a href="#">网站UI设计</a></p>
-				<p><a href="#">前端开发</a></p>
-				<p><a href="#">后台搭建</a></p>
-				<p><a href="#">模板开发</a></p>
-				<div class="arrow"></div>
-			</div>
-		</div>
-		<div class="detail-box">
-			<div class="img">
-				<img src="{% static 'img/polls/mobile.png'%} " alt="">
-			</div>
-			<p class="detail-title">移动开发</p>
-			<div class="classify mobile">
-				<p><a href="#">应用UI设计</a></p>
-				<p><a href="#">APP开发</a></p>
-				<p><a href="#">微信应用开发</a></p>
-				<p><a href="#"></a></p>
-				<div class="arrow"></div>
-			</div>
-		</div>
-		<div class="detail-box">
-			<div class="img">
-				<img src="{% static 'img/polls/media.png' %}" alt="">
-			</div>
-			<p class="detail-title">影视影音</p>
-			<div class="classify media">
-				<p><a href="#">文案设计</a></p>
-				<p><a href="#">影音录制</a></p>
-				<p><a href="#">影音制作</a></p>
-				<p><a href="#"></a></p>
-				<div class="arrow"></div>
-			</div>
-		</div>
-		<div class="detail-box">
-			<div class="img">
-				<img src="{% static 'img/polls/game.png'%}" alt="">
-			</div>
-			<p class="detail-title">动漫游戏</p>
-			<div class="classify game">
-				<p><a href="#">二维设计</a></p>
-				<p><a href="#">三维设计</a></p>
-				<p><a href="#">游戏设计</a></p>
-				<p><a href="#">脚本制作</a></p>
-				<div class="arrow"></div>
-			</div>
-		</div>
-	</div>
-	<div class="am-g am-container pic">
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic1.jpg'%}" alt="">
-		</div>
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic2.jpg'%}" alt="">
-		</div>
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic3.jpg'%}" alt="">
-		</div>
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic4.jpg'%}" alt="">
-		</div>
-	</div>
-	<div class="am-g am-container pic line2">
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic5.jpg'%}" alt="">
-		</div>
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic6.jpg'%}" alt="">
-		</div>
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic7.jpg'%}" alt="">
-		</div>
-		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-			<img src="{% static 'img/polls/pic8.jpg'%}" alt="">
-		</div>
-	</div>
-</div>
-<div class="news">
-	<div class="am-g am-container">
-		<div class="am-u-lg-12">
-			<h1 class="news-title">需求资讯<span class="en-title">/NEWS</span></h1>
-			<div class="am-g">
-				<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
-					<div class="image">
-						<img src="{% static 'img/polls/pic9.jpg'%}" alt="">
+				<img src="{% static 'img/logo.png' %}" alt="" class="logo-icon">
+				<span>数字资源加工交易平台</span>
+			</a>
+			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only am-collapsed" data-am-collapse="{target:'#collapse-head'}">
+				<span class="am-sr-only">导航切换</span>
+				<span class="am-icon-bars"></span>
+			</button>
+			<div class="am-collapse am-topbar-collapse" id="collapse-head">
+				<ul class="am-nav am-nav-pills am-topbar-nav">
+					<li class="am-active">
+						<a href="#">首页</a>
+					</li>
+					<li class="am-dropdown" data-am-dropdown>
+						<a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
+							服务分类 <span class="am-icon-caret-down"></span>
+						</a>
+						<ul class="am-dropdown-content">
+							{% for serviceModel in allServiceModel %}
+							<li><a href="#">{{ serviceModel.modelName }}</a></li>
+							{% endfor %}
+						</ul>
+					</li>
+					<li>
+						<a href="#">需求信息</a>
+					</li>
+					<li>
+						<a href="#">服务商</a>
+					</li>
+					<li>
+						<a href="#">关于我们</a>
+					</li>
+				</ul>
+				<div id="unlogin-header-region">
+					<div class="am-topbar-right">
+						<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" id="register" data-am-modal="{target:'#modal-register',closeViaDimmer:0}">
+							<span class="am-icon-pencil"></span> <span class="icon-text"><a href="{% url 'userLogin'%}">注册</a></span>
+						</button>
 					</div>
-					<div class="text">
-						<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-						<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+					<div class="am-topbar-right">
+						<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" id="signup" data-am-modal="{target:'#modal-signup',closeViaDimmer:0}">
+							<span class="am-icon-user"></span> <span class="icon-text">登陆</span>
+						</button>
 					</div>
 				</div>
-				<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
-					<div class="image">
-						<img src="{% static 'img/polls/pic10.jpg'%}" alt="">
+				<!-- <div id="login-header-region">
+					<div class="head-region">
+						<div class="am-topbar-right">
+							<div class="icon-1 am-topbar-btn am-btn" title="邀请">
+								<span class="am-icon-user-plus"></span>
+							</div>
+						</div>
+						<div class="am-topbar-right">
+							<div class="icon-1 am-topbar-btn am-btn" title="私信">
+								<span class="am-icon-envelope"></span>
+							</div>
+						</div>
+						<div class="am-topbar-right">
+							<div class="icon-1 am-topbar-btn am-btn" title="通知">
+								<span class="am-icon-flag"></span>
+							</div>
+						</div>
 					</div>
-					<div class="text">
-						<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-						<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+					<div class="head-region">
+						<div class="am-topbar-right">
+							<div class="uinfo-inner">
+								<div class="avatar">
+									<a href="#">
+										<img src="img/rockhentai.png" alt="" class="face">
+									</a>
+								</div>
+								<div class="user-stuff" id="user-menu-profile">
+									<div class="info">
+										<div class="uname">
+											<h3>Rockhentai</h3>
+										</div>
+										<div class="account-set user-info">
+											<span class="am-icon-cog"></span> 帐号设置
+										</div>
+										<div class="exit user-info">
+											<span class="am-icon-reply"></span> 退出帐号
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<div class="banner">
+		<div class="am-g">
+			<div class="am-u-lg-12">
+				<h1 class="get-title">R-Star 数字资源加工平台</h1>
+				<p>期待你的参与，咱们的平台就是这么牛逼！</p>
+			</div>
+		</div>
+	</div>
+	<div class="detail">
+		<div class="am-g am-container" id="detail">
+			{% for serviceModel in allServiceModel %}
+			<div class="detail-box">
+				<div class="img">
+					<img src="/upload/{{ serviceModel.modelImg}}" alt="">
+				</div>
+				<p class="detail-title">{{ serviceModel.modelName }}</p>
+				<div class="classify plain">
+					{% for model in serviceModel.classModel.all %}
+					<p><a href="#">{{ model.className}}</a></p>
+					{% endfor %}
+					<div class="arrow"></div>
 				</div>
 			</div>
-			<div class="am-g down">
-				<div class="am-u-lg-6 am-u-md-6 am-u-sm-12">
-					<div class="image">
-						<img src="{% static 'img/polls/pic11.jpg'%}" alt="">
+			{% endfor %}
+		</div>
+		<div class="am-g am-container pic">
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic1.jpg' %}" alt="">
+			</div>
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic2.jpg' %}" alt="">
+			</div>
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic3.jpg' %}" alt="">
+			</div>
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic4.jpg' %}" alt="">
+			</div>
+		</div>
+		<div class="am-g am-container pic line2">
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic5.jpg' %}" alt="">
+			</div>
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic6.jpg' %}" alt="">
+			</div>
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic7.jpg' %}" alt="">
+			</div>
+			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+				<img src="{% static 'img/index/pic8.jpg' %}" alt="">
+			</div>
+		</div>
+	</div>
+	<div class="news">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12">
+				<h1 class="news-title">需求资讯<span class="en-title">/NEWS</span></h1>
+				<div class="am-g">
+					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
+						<div class="image">
+							<img src="{% static 'img/index/pic9.jpg'%} " alt="">
+						</div>
+						<div class="text">
+							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
+							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+						</div>
 					</div>
-					<div class="text">
-						<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-						<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
+						<div class="image">
+							<img src="{% static 'img/index/pic10.jpg' %}" alt="">
+						</div>
+						<div class="text">
+							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
+							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+						</div>
 					</div>
 				</div>
-				<div class="am-u-lg-6 am-u-md-6 am-u-sm-12">
-					<div class="image">
-						<img src="{% static 'img/polls/pic12.jpg'%}" alt="">
+				<div class="am-g down">
+					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12">
+						<div class="image">
+							<img src="{% static 'img/index/pic11.jpg' %}" alt="">
+						</div>
+						<div class="text">
+							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
+							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+						</div>
 					</div>
-					<div class="text">
-						<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-						<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12">
+						<div class="image">
+							<img src="{% static 'img/index/pic12.jpg' %}" alt="">
+						</div>
+						<div class="text">
+							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
+							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="footer">
+	<div class="footer">
 		<p><a href="#">首页</a> | <a href="#">关于我们</a> | <a href="#">联系方式</a> | <a href="#">广告服务</a> | <a href="#">用户反馈</a> | <a href="#">隐私协议</a> | <a href="#">加入我们</a></p>
 	</div>
-	<script src="{% static 'js/jquery.js'%}"></script>
-	<script src="{% static 'js/amazeui.min.js'%}"></script>
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-register">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd">
+				<div class="register-form">
+					<form action="" method="POST" id="registerForm" class="am-form" data-am-validator>
+						<fieldset>
+							<legend>注册账号，免费加入数字网</legend>
+							<div class="am-form-group">
+								<label for="username">用户名</label>
+								<input type="text" id="username" minlength="3" placeholder="输入用户名（至少三个字符）" required/>
+							</div>
+							<div class="am-form-group">
+								<label for="email">邮箱</label>
+								<input type="email" id="email" placeholder="输入邮箱" required/>
+							</div>
+							<div class="am-form-group">
+								<label for="password">密码</label>
+								<input type="password" id="password" placeholder="请输入六位以上的数字字母组合" pattern="^\w{6,}$" data-foolish-msg="请填写密码" required/>
+							</div>
+							<div class="am-form-group">
+								<label for="password2">确认密码</label>
+								<input type="password" id="password2" placeholder="请重复上面的密码" data-equal-to="#password" required/>
+							</div>
+							<div class="am-form-group">
+								<label>你的身份：</label>
+								<label class="am-radio-inline">
+									<input type="radio" value="" name="identity" data-am-ucheck required> 学生
+								</label>
+								<label class="am-radio-inline">
+									<input type="radio" name="identity" data-am-ucheck checked> 企业
+								</label>
+							</div>
+							<div class="am-form-group">
+								<label for="">验证码：</label>
+								<input type="text" name="captcha" maxlength="4" class="captcha" id="captcha" required>
+								<img src="http://www.dajie.com/captcha/code?t1448356219136" alt="" class="captcha-img captchChange">
+								<button class="am-btn am-btn-primary repeat-btn" type="button"><span class="am-icon-repeat"></span></button>
+							</div>
+							<button class="am-btn am-btn-primary" type="submit">确认注册</button>
+							<div class="provision">
+								我已阅读并同意
+								<a href="#" target="_blank">数字网服务协议</a>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-signup">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd">
+				<div class="register-form">
+					<form action="" method="POST" id="signupForm" class="am-form" data-am-validator>
+						<fieldset>
+							<legend>登陆数字网</legend>
+							<div class="am-form-group">
+								<label for="username">用户名</label>
+								<input type="text" id="username" minlength="3" placeholder="请输入用户名/邮箱" required/>
+							</div>
+							<div class="am-form-group">
+								<label for="password">密码</label>
+								<input type="password" id="password" placeholder="请输入密码" pattern="^\w{6,}$" data-foolish-msg="请填写密码" required/>
+								<a href="#" class="fg-psw">忘记密码？</a>
+							</div>
+							<button class="am-btn am-btn-primary" type="submit" id="right-now">立即登陆</button>
+							<div class="go-reg">
+								<p>还没有数字网账号？<a href="#">立即注册 <span class="am-icon-arrow-circle-right"></span></a></p>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/amazeui.min.js' %}"></script>
+	<script src="{% static 'js/index/index.js' %}"></script>
 	<script>
 	$(function() {
 		// $('.detail-box').each(function() {
@@ -229,12 +303,11 @@
 		// 		})
 		// 	})
 		// })
-		$('.detail-box').hover(function() {
-			$('.classify').slideDown().css({'opacity':1});
-		});
-		$('.pic').hover(function() {
-			$('.classify').slideUp().css({'opacity':0});
-		})
+		// $('#right-now').click(function() {
+		// 	$('#unlogin-header-region').hide();
+		// 	$('#login-header-region').show();
+		// })
+		
 
 	})
 	</script>
