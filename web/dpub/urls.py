@@ -4,5 +4,6 @@ from dpub.views import *
 
 urlpatterns =[
     #url(r'$/',views.get_index,name='index'),
-    url(r'^login/$',Login.as_view(),name='userLogin')
-]
+    url(r'^login/$',Login.as_view(),name='userLogin'),
+    url(r'^add/$',UserAdd.as_view(),name='userAdd')
+    ]
