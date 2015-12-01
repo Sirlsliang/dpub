@@ -1,14 +1,17 @@
+#coding:utf-8#
 from django.db import models
 from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Exuser(models.Model):
-    IDENTITY = (('1','1'),('0','0'),)
+    IDENTITY = (
+        ('0','企业'),
+        ('1','学生'),
+    )
     user = models.OneToOneField(User)
-    identity = models.CharField(max_length=2,choices=IDENTITY,default='0')
-    inTime   = models.DateTimeField(auto_now=True,auto_now_add=False)
-    
+    identity = models.CharField(max_length=2,choices=IDENTITY,default='1')
+    inTime   = models.DateTimeField(auto_now=True,auto_now_add=False)    
 
 
 class School(models.Model):

@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from . import views
+from dpub.views import *
 
 urlpatterns =[
     #url(r'$/',views.get_index,name='index'),
-    url(r'^login/$',views.userLogin,name='userLogin')
+    url(r'^login/$',Login.as_view(),name='userLogin')
 ]
