@@ -1,0 +1,103 @@
+{% load staticfiles %}
+<div class="am-container">
+	<a class="am-topbar-brand">
+		<img src="{% static 'img/logo.png' %}" alt="" class="logo-icon">
+		<span>数字资源加工交易平台</span>
+	</a>
+	<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only am-collapsed" data-am-collapse="{target:'#collapse-head'}">
+		<span class="am-sr-only">导航切换</span>
+		<span class="am-icon-bars"></span>
+	</button>
+	<div class="am-collapse am-topbar-collapse" id="collapse-head">
+		<ul class="am-nav am-nav-pills am-topbar-nav">
+			<li class="am-active">
+				<a href="/index.html">首页</a>
+			</li>
+			<li class="am-dropdown" data-am-dropdown>
+				<a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
+					服务分类 <span class="am-icon-caret-down"></span>
+				</a>
+				<ul class="am-dropdown-content">
+					{% for serviceModel in allServiceModel %}
+					<li><a href="#">{{ serviceModel.modelName }}</a></li>
+					{% endfor %}
+				</ul>
+			</li>
+			<li>
+				<a href="#">需求信息</a>
+			</li>
+			<li>
+				<a href="#">服务商</a>
+			</li>
+			<li>
+				<a href="#">关于我们</a>
+			</li>
+		</ul>
+		{% if not request.user.is_authenticated %}
+		<div id="unlogin-header-region">
+			<div class="am-topbar-right">
+				<a class="am-btn am-btn-primary am-topbar-btn am-btn-sm"  href="{% url 'userAdd'%}" >
+					<span class="am-icon-pencil"></span> <span class="icon-text">注册</span>
+				</a>
+			</div>
+			<div class="am-topbar-right">
+				<a class="am-btn am-btn-primary am-topbar-btn am-btn-sm"  href="{% url 'userLogin'%}" >
+					<span class="am-icon-user"></span> <span class="icon-text">登陆</span>
+				</a>
+			</div>
+		</div>
+		{% else %}
+		<div id="login-header-region">
+			<div class="head-region">
+				<div class="am-topbar-right">
+					<div class="icon-1 am-topbar-btn am-btn" title="邀请">
+						<span class="am-icon-user-plus"></span>
+					</div>
+				</div>
+				<div class="am-topbar-right">
+					<div class="icon-1 am-topbar-btn am-btn" title="私信">
+						<span class="am-icon-envelope"></span>
+					</div>
+				</div>
+				<div class="am-topbar-right">
+					<div class="icon-1 am-topbar-btn am-btn" title="通知">
+						<span class="am-icon-flag"></span>
+					</div>
+				</div>
+			</div>
+			<div class="head-region">
+				<div class="am-topbar-right">
+					<div class="uinfo-inner">
+						<div class="avatar">
+							<a href="{% url 'backendManage'%}">
+								<img src="{% static 'img/rockhentai.png' %}" alt="" class="face">
+							</a>
+						</div>
+						<div class="user-stuff" id="user-menu-profile">
+							<div class="info">
+								<div class="uname">
+									<h3>{% if request.user.exuser.nickname %}
+										{{ request.user.exuser.nickname }}
+										{%  else %}
+										{{ request.user.username }}
+										{% endif%}
+									</h3>
+								</div>
+								<div class="send-req user-info">
+									<a href="{% url 'articleAdd' %}"><span class="am-icon-send"></span> 发布需求</a>
+								</div>
+								<div class="account-set user-info">
+									<a href="#"><span class="am-icon-cog"></span> 帐号设置</a>
+								</div>
+								<div class="exit user-info">
+									<a href="{% url 'userLogout'%}"><span class="am-icon-reply"></span> 退出帐号</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>

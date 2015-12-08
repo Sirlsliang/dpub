@@ -1,57 +1,8 @@
+{% extends "base.html"%}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta name="author" content="rockhentai">
-	<link rel="icon" href="{% static 'img/logo.png'%}">
-	<title>首页</title>
-	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'css/index/index.css' %}">
-</head>
-<body>
-	<div class="am-topbar am-topbar-fixed-top">
-		<div class="am-container">
-			<a class="am-topbar-brand">
-				<img src="{% static 'img/logo.png' %}" alt="" class="logo-icon">
-				<span>数字资源加工交易平台</span>
-			</a>
-			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only am-collapsed" data-am-collapse="{target:'#collapse-head'}">
-				<span class="am-sr-only">导航切换</span>
-				<span class="am-icon-bars"></span>
-			</button>
-			<div class="am-collapse am-topbar-collapse" id="collapse-head">
-				<ul class="am-nav am-nav-pills am-topbar-nav">
-					<li class="am-active">
-						<a href="/index.html">首页</a>
-					</li>
-					<li class="am-dropdown" data-am-dropdown>
-						<a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
-							服务分类 <span class="am-icon-caret-down"></span>
-						</a>
-						<ul class="am-dropdown-content">
-							{% for serviceModel in allServiceModel %}
-							<li><a href="#">{{ serviceModel.modelName }}</a></li>
-							{% endfor %}
-						</ul>
-					</li>
-					<li>
-						<a href="#">需求信息</a>
-					</li>
-					<li>
-						<a href="#">服务商</a>
-					</li>
-					<li>
-						<a href="#">关于我们</a>
-					</li>
-				</ul>
-		
-				{% include 'dpub/login_register.html' %}
-			</div>
-		</div>
-	</div>
+{% block title%}首页{% endblock %}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock %}
+{% block content %}
 	<div class="banner">
 		<div class="am-g">
 			<div class="am-u-lg-12">
@@ -153,14 +104,13 @@
 			</div>
 		</div>
 	</div>
-	{% include 'dpub/footer.html'%}
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-register">
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-register">
 		<div class="am-modal-dialog">
 			<div class="am-modal-hd">
 				<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 			</div>
 			<div class="am-modal-bd">
-					{% include 'dpub/registerform.html' %}
+					{% include 'parts/registerform.html' %}
 			</div>
 		</div>
 	</div>
@@ -170,30 +120,12 @@
 				<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 			</div>
 			<div class="am-modal-bd">
-				{% include 'dpub/loginbox.html'%}
+				{% include 'parts/loginbox.html'%}
 			</div>
 		</div>
 	</div>
-	<script src="{% static 'js/jquery.js' %}"></script>
-	<script src="{% static 'js/amazeui.min.js' %}"></script>
 	<script src="{% static 'js/index/index.js' %}"></script>
-	<script>
-	$(function() {
-		// $('.detail-box').each(function() {
-		// 	$(this).hover(function() {
-		// 		$(this).find('.classify').slideDown();
-		// 		$(this).find('.classify').css({
-		// 			'opacity':1
-		// 		})
-		// 	})
-		// })
-		// $('#right-now').click(function() {
-		// 	$('#unlogin-header-region').hide();
-		// 	$('#login-header-region').show();
-		// })
-		
-
-	})
-	</script>
-</body>
-</html>
+	{% endblock%}
+	{% block footer%}
+		{% include 'parts/footer.html'%}
+	{% endblock %}

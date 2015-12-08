@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="author" content="rockhentai">
+	<link rel="icon" href="{% static 'img/logo.png'%}">
+	<title>{% block title%}{% endblock %}</title>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/amazeui.min.js' %}"></script>
+	{% block appendices %} {% endblock%}
+	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/index/index.css' %}"/>
+</head>
+<body>
+	<div class="am-topbar am-topbar-fixed-top">
+		{% block navigator%}{% endblock %}
+	</div>
+	<div >
+		{% block content%}{% endblock %}
+	</div>
+	<div class="footer">
+		{% block footer%}{% endblock %}
+	</div>
+
+</body>
+</html>

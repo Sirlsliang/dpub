@@ -1,14 +1,23 @@
 #coding:utf-8#
-from django import forms
+from django.forms import ModelForm,PasswordInput,forms
+
 from django.contrib.auth.models import User
 from .models import *
-class UserForm(forms.Form):
-    IDENTICAL = (
-        ('1','企业'),
-        ('0','学生'),
-    )
-    userName = forms.CharField(label='用户名',max_length=99,error_messages={'required':'请输入用户'})
-    password = forms.CharField(label='密码',max_length=100)
-    conPassword = forms.CharField(label='确认密码',max_length=100)
-    email = forms.EmailField()
-    identity = forms.ChoiceField(label='身份',choices=IDENTICAL)
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+class ExUserForm(ModelForm):
+    class Meta:
+        model = Exuser
+        fields = '__all__'
+        exclude =['user']
+
+
+class ArticleForm(ModelForm):
+    class Meta:
+        model = Article
+        fields ='__all__'
+        exclude =['user']

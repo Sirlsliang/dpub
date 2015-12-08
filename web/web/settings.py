@@ -89,7 +89,7 @@ DATABASES = {
 #SessionConfiguration
 #SESSION_ENGINE='django.contrib.sessions.backends.signed_cookies'
 #SESSION_EXPIRE_AT_BROWSER_CLOSE=True,default=False
-#SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

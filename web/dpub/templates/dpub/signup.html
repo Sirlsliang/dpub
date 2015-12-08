@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="author" content="rockhentai">
-	<link rel="icon" href="img/logo.png">
+	<link rel="icon" href="{% static 'img/logo.png' %}">
 	<title>登陆</title>
-	<link rel="stylesheet" href="css/amazeui.min.css"/>
-	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/index/index.css' %}"/>
 	<style>
 	.header {
 		position: relative;
@@ -70,12 +71,12 @@
 <body>
 	<div class="header">
 		<a href="index.html" class="logo">
-			<img src="img/logo2.png" alt="">
+			<img src="{% static 'img/logo2.png'%}" alt="">
 			数字网最牛逼
 		</a>
 	</div>
 	<div class="content-box">
-		{% include 'dpub/loginbox.html'%}
+		{% include 'parts/loginbox.html'%}
 	</div>
 	<div class="footer">
 		<h4 class="slogan">—— 专注数字出版 ——</h4>
