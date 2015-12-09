@@ -62,44 +62,17 @@
 			<div class="am-u-lg-12">
 				<h1 class="news-title">需求资讯<span class="en-title">/NEWS</span></h1>
 				<div class="am-g">
+					{% for article in articles %}
 					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
 						<div class="image">
-							<img src="{% static 'img/index/pic9.jpg'%} " alt="">
+							<img src=" /upload/{{ article.img }} " alt="">
 						</div>
 						<div class="text">
-							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
+							<h2 class="text-title">{{ article.title}}</h2>
+							<p>{{ article.content|slice:"40" }}......</p>
 						</div>
 					</div>
-					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
-						<div class="image">
-							<img src="{% static 'img/index/pic10.jpg' %}" alt="">
-						</div>
-						<div class="text">
-							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-g down">
-					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12">
-						<div class="image">
-							<img src="{% static 'img/index/pic11.jpg' %}" alt="">
-						</div>
-						<div class="text">
-							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
-						</div>
-					</div>
-					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12">
-						<div class="image">
-							<img src="{% static 'img/index/pic12.jpg' %}" alt="">
-						</div>
-						<div class="text">
-							<h2 class="text-title">肯德基创意广告《原味鸡手腕花》-网聚微电影</h2>
-							<p>本片是肯德基最近推出的一部另类搞笑广告，将美国传统婚礼的手腕花进行了创造性改良，推出一款“原味鸡婚礼手腕花”，为热...</p>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

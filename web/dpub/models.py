@@ -54,6 +54,7 @@ class Article(models.Model):
     phonenum  = models.IntegerField(null=True,blank=True)
     email = models.EmailField(null=True,blank=True)
     endDate = models.DateTimeField(auto_now=False,auto_now_add=False)
+    boolIndex = models.IntegerField(null=True,blank=True)
     insertDate = models.DateTimeField(auto_now=True,auto_now_add=False)
 
     class Meta:

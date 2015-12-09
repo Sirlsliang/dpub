@@ -1,0 +1,30 @@
+	<table class="am-table am-table-striped am-table-hover">
+						<tbody>
+							{%  for article in articles%}
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td>{{ articl.price }}</td>
+								<td>{{ article.title }}</td>
+								<td>{{ article.insertDate }}</td>
+								<td><a href="/manage/backend/article/update/{{ article.id}}/">修改</a></td>
+								<td><a href="javascript:void(0);" onclick="articleDel({{ article.id }})">删除</a></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td colspan="2">
+									{%  if articles.has_previous %}
+										<a href="javascript:void(0);" onclick="getTheArticle({{articles.previous_page_number}})">上一页</a>
+									{% endif %}
+									{%  if articles.has_next  %}
+									<a href="javascript:void(0);" onclick="getTheArticle({{articles.next_page_number}})">下一页</a>
+									{% endif %}
+								</td>
+							</tr>
+						</tfoot>
+

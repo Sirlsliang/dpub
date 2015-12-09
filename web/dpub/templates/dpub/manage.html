@@ -33,37 +33,30 @@
 					<div class="r-btn active">发布管理</div>
 					<div class="r-btn"><a href="{% url 'articleAdd' %}" >发布需求</a></div>
 				</div>
-				<div class="content-box">
-					<table class="am-table am-table-striped am-table-hover">
-						<tbody>
-							{%  for article in articles%}
-							<tr>
-								<td>{{ forloop.counter }}</td>
-								<td>{{ articl.price }}</td>
-								<td>{{ article.title }}</td>
-								<td>{{ article.insertDate }}</td>
-								<td><a href="#">修改</a></td>
-								<td><a href="#">删除</a></td>
-							</tr>
-							{% endfor %}
-						</tbody>
-						<tfoot>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td colspan="2">
-									{%  if articles.has_previous %}
-										<a href="?page={{articles.previous_page_number }}">上一页</a>
-									{% endif %}
-									{%  if articles.has_next  %}
-										<a href="?page={{articles.next_page_number }}">下一页</a>
-									{% endif %}
-								</td>
-							</tr>
-						</tfoot>
-					</table>
+				<script>
+					function getTheArticle(page){
+						$.get("/manage/backend/article/"+page+"/",
+							function(data){
+								$("#articleBox").html(data);
+							}
+						);
+					}
+					function articleDel(id){
+						if(confirm("您确定要删除该文章？？")){
+							$.get(
+								"/manage/backend/article/del/"+id+"/",
+								function(data){
+									alert("删除成功");
+									$("#articleBox").html(data);
+								}
+							);
+						}
+					}
+					$(function(){
+						getTheArticle(1);
+					});
+				</script>
+				<div class="content-box" id="articleBox">
 				</div>
 			</div>
 		</div>

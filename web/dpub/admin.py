@@ -1,3 +1,4 @@
+#coding:utf-8#
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -11,8 +12,8 @@ class CourseInline(admin.StackedInline):
     extra = 3
 class SchoolAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('SchoolName',{'fields':['schName']}),
-        ('School Information',{'fields':['schDesc','schUrl','schLogo']})
+        ('学校名称',{'fields':['schName']}),
+        ('学校信息',{'fields':['schDesc','schUrl','schLogo']})
     ]
     inlines = [CourseInline]
     list_display = ('schName',)
@@ -23,9 +24,10 @@ admin.site.register(School,SchoolAdmin)
 class ClassInline(admin.StackedInline):
     model = ClassModel
     extra = 3
+
 class ServiceAdmin(admin.ModelAdmin):
     fieldsets =[
-        ('ServiceModel',{'fields':['modelName','modelImg']}),        
+        ('首页模块',{'fields':['modelName','modelImg']}),        
     ]
     inlines = [ClassInline]
     list_display = ('modelName',)
@@ -38,7 +40,20 @@ class ExuserInline(admin.StackedInline):
     
 class UserAdmin(UserAdmin):
     inlines = [ExuserInline,]
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('title','user','insertDate','endDate')
+
 admin.site.unregister(User)
 admin.site.register(User,UserAdmin)
 
-admin.site.register(Article)
+
+admin.site.register(Article,ArticleAdmin)
+
+
+
+
+
+
+
+

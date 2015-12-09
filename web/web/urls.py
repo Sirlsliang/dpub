@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from dpub.views import IndexView
+from dpub.front.views import IndexView
 
 urlpatterns = [
     #url(r'^',include('dpub.urls')),
     url(r'^$',IndexView.as_view(),name='Index'),
     url(r'^index.html$',IndexView.as_view(),name='Index'),
-    url(r'^manage/',include('dpub.urls')),
+    url(r'^manage/backend/',include('dpub.backend.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -14,33 +14,33 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth.decorators import login_required,permission_required
 from django.utils.decorators import method_decorator
 
-from .models import *
-from .forms import * 
+from dpub.models import *
+from dpub.forms import * 
 
+from dpub.conf import *
 class LoginProtectedView(TemplateView): 
     @method_decorator(login_required(redirect_field_name='next',login_url='/manage/backend/user/login'))
     def dispatch(self,*args,**kwargs):
         return super(LoginProtectedView,self).dispatch(*args,**kwargs)
 
-# Create your views here.
-class IndexView(View):
-    def get(self,request):
-        allServiceModel = ServiceModel.objects.all()
-        return render(request,'dpub/index.html',{'allServiceModel':allServiceModel,})
 
 class Login(View):
     def post(self,request):
+        errorText = ""
+        url = "/manage/backend/user/login/"
         userName = request.POST['userName']
         password = request.POST['password']
         user = authenticate(username=userName,password=password)
         if user is not None:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect("/manage/backend/manage/")
+                errorText = "恭喜你,登陆成功。"
+                url = "/manage/backend/manage/"
             else:
-                return HttpResponse("user is not active")
+                errorText ="用户未激活,请联系客服人员！！！"
         else:
-            return HttpResponse("user is none")
+            errorText = "用户名或密码错误！!！"
+        return render(request,'message.html',{'message':errorText,'url':url})
 
     def get(self,request):
         return render(request,'dpub/signup.html')
@@ -55,23 +55,27 @@ class UserManage(LoginProtectedView):
         return HttpResponse("用户管理")
 
 class UserAdd(View):
-    def post(self,request): 
+    def post(self,request):
+        errorText =""
+        url = "/manage/backend/user/add/"
         username = request.POST['username'] 
         password = request.POST['password']
         email    = request.POST['email']
         conpassword = request.POST['conPassword']
         identity = request.POST['identity']
         try:
-            if password and conPassword and password == conpassword:
+            if password and conpassword and password == conpassword:
                 user = User.objects.create_user(username,email,password)
                 exuser= Exuser(user=user,identity=identity)
                 exuser.save()
                 customer = Group.objects.get(name='customer')
                 user.groups.add(customer)
                 user.save()
-                return HttpResponseRedirect("admin")
+                errorText ="恭喜您，注册成功"
+                url = "/manage/backend/user/login/"
         except Exception as e:
-            return HttpResponse("添加用户异常:%s"%e)
+            errorText ="注册出错，请重新注册"
+        return render(request,'message.html',{'message':errorText,'url':url})
 
     def get(self,request):
         userForm = UserForm()
@@ -80,20 +84,7 @@ class UserAdd(View):
 class Manage(LoginProtectedView):
     def get(self,request):
         allServiceModel = ServiceModel.objects.all()
-        user = request.user
-        articleList = Article.objects.filter(user=user)
-        paginator = Paginator(articleList,3)
-        page = request.GET['page']
-        if not page:
-            page = 1
-        try:
-            articles = paginator.page(page)
-        except PageNotAnInteger:
-            articles = paginator.page(1) 
-        except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
-
-        return render(request,'dpub/manage.html',{'allServiceModel':allServiceModel,'articles':articles})
+        return render(request,'dpub/manage.html',{'allServiceModel':allServiceModel,})
 
 
 class ArticleAdd(LoginProtectedView): 
@@ -111,20 +102,35 @@ class ArticleAdd(LoginProtectedView):
             return HttpResponse("%s , %s, %s, %s, %s, %s"%(article.title,article.content,article.img,article.phonenum,article.endDate,article.email))
         return HttpResponse("Wrong")
 
+@login_required(redirect_field_name='next',login_url='/manage/backend/user/login')
+def articlesManage(request,page):
+    user = request.user
+    articleList = Article.objects.filter(user=user)
+    paginator = Paginator(articleList,ARTICLE_NUMS)
+    if not page:
+        page = 1
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1) 
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    return render(request,'ajax/article.html',{'articles':articles})
+
+@login_required(redirect_field_name='next',login_url='/manage/backend/user/login')
+def articleUpdate(request,pk):
+    if request.method == "GET":
+        article = Article.objects.get(pk=pk)
+        articleForm = ArticleForm(instance=article)
+        return render(request,'dpub/article.html',{'article':articleForm })
+    else:
+        return HttpResponse("POST")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@login_required(redirect_field_name='next',login_url='/manage/backend/user/login')
+def articleDel(request,pk):
+    Article.objects.get(pk=pk).delete()
+    articleList = Article.objects.filter(user=request.user)
+    paginator = Paginator(articleList,ARTICLE_NUMS)
+    articles = paginator.page(1)
+    return render(request,'ajax/article.html',{'articles':articles})
