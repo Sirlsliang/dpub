@@ -26,3 +26,15 @@ class IndexView(View):
         return render(request,'dpub/index.html',{'allServiceModel':allServiceModel,'articles':articles,})
 
 
+class ServersView(View):
+    def get(self,request):
+        allServiceModel = ServiceModel.objects.all()
+        schools = School.objects.all()
+        return render(request,'dpub/servers.html',{'schools':schools,'allServiceModel':allServiceModel})
+
+
+def page_not_found(request):
+    return render(request,'dpub/404.html')
+
+def page_error(request):
+    return render(request,'dpub/503.html')

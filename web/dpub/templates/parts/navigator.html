@@ -27,7 +27,7 @@
 				<a href="#">需求信息</a>
 			</li>
 			<li>
-				<a href="#">服务商</a>
+				<a href="{% url 'serversView'%}">服务商</a>
 			</li>
 			<li>
 				<a href="#">关于我们</a>
@@ -70,7 +70,11 @@
 					<div class="uinfo-inner">
 						<div class="avatar">
 							<a href="{% url 'backendManage'%}">
-								<img src="{% static 'img/rockhentai.png' %}" alt="" class="face">
+								{% if request.user.exuser.sex > 0 %}
+								<img src="{% static 'img/user-head-female.jpg' %}" alt="" class="face">
+								{% else %}
+								<img src="{% static  'img/user-head.png' %}" alt="" class="face">
+								{% endif %}
 							</a>
 						</div>
 						<div class="user-stuff" id="user-menu-profile">

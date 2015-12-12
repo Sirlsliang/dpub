@@ -1,0 +1,75 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title%}用户管理{% endblock%}
+{% block navigator %}{% include "parts/navigator.html"%} {% endblock %}
+{% block content%}
+<div class="s-title">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12" style="position:relative;">
+				<h1 class="server-title">用户管理</h1>
+			</div>
+		</div>
+	</div>
+	<div class="outer user">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-box">
+					<div class="user-head">
+						<img src="{% static 'img/user-head.png' %}" alt="">
+						<h4><a href="#">修改资料</a></h4>
+					</div>
+					<div class="user-info">
+						<div class="info-line"><span>用户名</span><span class="info">{{ user.username }}</span></div>
+						<div class="info-line"><span>电&nbsp;&nbsp;&nbsp;&nbsp;话</span><span class="info">{{ user.exuser.identity }}<span></div>
+						<div class="info-line"><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span><span class="info">{{ user.email }}</span></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="r-btns">
+					<div class="r-btn active">发布管理</div>
+					<div class="r-btn"><a href="{% url 'articleAdd' %}" >发布需求</a></div>
+				</div>
+				<script>
+					function getTheArticle(page){
+						$.get("/manage/article/"+page+"/",
+							function(data){
+								$("#articleBox").html(data);
+							}
+						);
+					}
+					function articleDel(id){
+						if(confirm("您确定要删除该文章？？")){
+							$.get(
+								"/manage/article/del/"+id+"/",
+								function(data){
+									alert("删除成功");
+									$("#articleBox").html(data);
+								}
+							);
+						}
+					}
+					$(function(){
+						getTheArticle(1);
+					});
+				</script>
+				<div class="content-box" id="articleBox">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-box">
+					<h2>我收藏的需求</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{% static 'js/index/index.js' %}"></script>
+	{% endblock%}
+	{% block footer%}
+		{% include 'parts/footer.html'%}
+	{% endblock %}

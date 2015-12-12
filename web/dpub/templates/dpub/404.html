@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="author" content="rockhentai">
+	<link rel="icon" href="{% static 'img/logo.png' %}">
+	<title>404</title>
+	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
+	<style>
+	.notFound {
+		margin-top: 50px;
+		text-align: center;
+		min-height: 870px;
+	}
+
+	.notFound img {
+		width: 100%;
+	}
+
+	.notFound h1 {
+		color: #0c71ad;
+		font-size: 40px;
+	}
+
+	.footer {
+		height: 60px;
+		background: #1d445b;
+	}
+	</style>
+</head>
+<body>
+	<div class="notFound">
+		<div class="am-g am-container">
+			<div class="am-u-lg-8 am-u-lg-centered am-u-md-8 am-u-md-centered">
+				<img src="{% static 'img/404.jpg' %}" alt="">
+				<h1>哎呀妈呀！找不到网页了</h1>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+	</div>
+</body>
+</html>

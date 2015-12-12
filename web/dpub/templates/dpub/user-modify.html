@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}用户管理{%endblock%}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock %}
+{% block content %}
+<div class="s-title">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12" style="position:relative;">
+				<h1 class="server-title">用户管理</h1>
+			</div>
+		</div>
+	</div>
+	<div class="outer user">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					修改资料
+				</div>
+				<div class="content-box">
+					<div class="user-head">
+								{% if request.user.exuser.sex > 0 %}
+								<img src="{% static 'img/user-head-female.jpg' %}" alt="" >
+								{% else %}
+								<img src="{% static  'img/user-head.png' %}" alt="" >
+								{% endif %}
+					</div>
+					<div class="modify-info">
+						<form action="{% url 'userManage'%}" method="POST" id="modifyDataForm" class="am-form" data-am-validator>
+							{% csrf_token %}
+							<fieldset>
+								<div class="am-form-group">
+									<label for="username">用户名</label>
+									<input type="text" id="username" name="username" placeholder="" class="input" value="{{ user.username}}">
+								</div>
+								<div class="am-form-group">
+									<label for="username">昵称</label>
+									<input type="text" id="nickname" name="nickname" placeholder="" class="input" value="{% if user.exuser.nickname%}{{ user.exuser.nickname }}{% endif%}">
+								</div>
+								<div class="am-form-group">
+									<label>性别</label>
+									{% if user.exuser.sex > 0 %}
+									<label class="am-radio-inline">
+										<input type="radio" value="1" name="sex" data-am-ucheck checked> 女
+									</label>
+									<label class="am-radio-inline">
+										<input type="radio" value="0" name="sex" data-am-ucheck > 男
+									</label>
+									{% else%}
+									<label class="am-radio-inline">
+										<input type="radio" value="1" name="sex" data-am-ucheck> 女
+									</label>
+									<label class="am-radio-inline">
+										<input type="radio" name="sex" value="0" data-am-ucheck checked> 男
+									</label>
+									{% endif %}
+								</div>
+								<div class="am-form-group">
+									<label for="username">邮箱</label>
+									<input type="text" id="email" placeholder="" name="email" class="input" value="{{ user.email}}">
+								</div>
+								<div class="am-form-group">
+									<label for="username">电话</label>
+									<input type="text" id="phonenum" placeholder="" class="input" name="phonenum" value="{% if user.exuser.phonenum%}{{ user.exuser.phonenum}}{% endif %}">
+								</div>
+								<div class="am-form-group">
+									<label for="username">所在公司</label>
+									<input type="text" id="companyname" placeholder="" name="companyname" class="input" value="{% if user.exuser.companyname%}{{ user.exuser.companyname}}{% endif%}">
+								</div>
+								<button class="am-btn am-btn-primary" type="submit" id="save">保存</button>
+							</fieldset>
+						</form>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					修改密码
+				</div>
+				<div class="content-box changePsw">
+					<div class="modify-info">
+						<form action="" method="POST" id="changePswForm" class="am-form" data-am-validator>
+							<fieldset>
+								<div class="am-form-group">
+									<label for="currentPsw">当前密码</label>
+									<input type="password" id="currentPsw" placeholder="请输入3-12个字符" class="input" pattern="^\w{3,12}$">
+								</div>
+								<div class="am-form-group">
+									<label for="newPsw">设置新密码</label>
+									<input type="password" id="newPsw" placeholder="请输入3-12个字符" class="input" pattern="^\w{3,12}$">
+								</div>
+								<div class="am-form-group">
+									<label for="confirmPsw">确认新密码</label>
+									<input type="password" id="confirmPsw" placeholder="请再次输入您的新密码" class="input" data-equal-to="#newPsw">
+								</div>
+								<button class="am-btn am-btn-primary" type="submit" id="save">保存</button>
+							</fieldset>
+						</form>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	{% block footer%}
+	{% include 'parts/footer.html'%}
+	{% endblock %}

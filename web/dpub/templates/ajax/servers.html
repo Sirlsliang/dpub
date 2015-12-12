@@ -1,0 +1,93 @@
+<div class="am-u-lg-12 content-wrapper">
+			<div class="content-box">
+				<div class="server-tabs">
+					<ul class="server-tabs-nav">
+						<li class="active"><a href="#tab1">所有服务商</a></li>
+						<li class=""><a href="#tab2">企业服务商</a></li>
+						<li class=""><a href="#tab3">校园服务商</a></li>
+						<li class=""><a href="#tab4">个人服务商</a></li>
+					</ul>
+					<div class="server-tabs-bd">
+						<div class="server-tab-panel active" id="tab1">
+							<div class="am-g am-g-collapse">
+								{% for school in schools %}
+								<div class="am-u-lg-4 am-u-md-6 am-u-sm-12 server-box">
+									<div class="server-content">
+										<div class="am-g">
+											<div class="am-u-lg-5 am-u-md-5 am-u-sm-5">
+												<img src="/upload/{{ school.schLogo}}" alt="" class="school-logo">
+												<div class="server-btns">
+													<p><a href="{{school.schUrl}}">进入学校主页</a></p>
+													<p><a href="#">给我留言</a></p>
+													<p><a href="#">好评100%</a></p>
+												</div>												</div>
+												<div class="am-u-lg-7 am-u-md-7 am-u-sm-7 school-info">
+													<h1><a href="{{school.schUrl}}">{{ school.schName }}</a></h1>
+													<h3>数字出版技术专业</h3>
+													<p>{{ school.schDesc|slice:"100" }}</p>
+												</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="server-tab-panel" id="tab2"></div>
+						<div class="server-tab-panel" id="tab3">
+							<div class="am-g am-g-collapse">
+
+								{% for school in schools %}
+								<div class="am-u-lg-4 am-u-md-6 am-u-sm-12 server-box">
+									<div class="server-content">
+										<div class="am-g">
+											<div class="am-u-lg-5 am-u-md-5 am-u-sm-5">
+												<img src="/upload/{{ school.schLogo}}" alt="" class="school-logo">
+												<div class="server-btns">
+													<p><a href="#">进入学校主页</a></p>
+													<p><a href="#">给我留言</a></p>
+													<p><a href="#">好评100%</a></p>
+												</div>
+											</div>
+											<div class="am-u-lg-7 am-u-md-7 am-u-sm-7 school-info">
+												<h1><a href="{{school.schUrl}}">{{ school.schName }}</a></h1>
+												<h3>数字出版技术专业</h3>
+												<p>{{ school.schDesc|slice:"100" }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="server-tab-panel" id="tab4">
+							<div class="am-g am-g-collapse">
+								{% for school in schools %}
+								<div class="am-u-lg-4 am-u-md-6 am-u-sm-12 server-box">
+									<div class="server-content">
+										<div class="am-g">
+											<div class="am-u-lg-5 am-u-md-5 am-u-sm-5">
+												<img src="/upload/{{ school.schLogo}}" alt="" class="school-logo">
+												<div class="server-btns">
+													<p><a href="#">进入学校主页</a></p>
+													<p><a href="#">给我留言</a></p>
+													<p><a href="#">好评100%</a></p>
+												</div>
+											</div>
+											<div class="am-u-lg-7 am-u-md-7 am-u-sm-7 school-info">
+												<h1><a href="{{school.schUrl}}">{{ school.schName }}</a></h1>
+												<h3>数字出版技术专业</h3>
+												<p>{{ school.schDesc|slice:"100" }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

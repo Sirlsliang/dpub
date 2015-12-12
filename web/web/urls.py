@@ -21,6 +21,10 @@ urlpatterns = [
     #url(r'^',include('dpub.urls')),
     url(r'^$',IndexView.as_view(),name='Index'),
     url(r'^index.html$',IndexView.as_view(),name='Index'),
-    url(r'^manage/backend/',include('dpub.backend.urls')),
+    url(r'^manage/',include('dpub.backend.urls')),
+    url(r'^get/',include('dpub.front.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
+
+handler404 = 'dpub.front.views.page_not_found'
+handler500 = 'dpub.front.views.page_error'

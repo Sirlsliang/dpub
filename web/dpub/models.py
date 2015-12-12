@@ -7,21 +7,18 @@ from django.contrib.auth.models import (BaseUserManager,AbstractBaseUser)
 # Create your models here.
 
 class Exuser(models.Model):
-    IDENTITY = (
-        ('0','企业'),
-        ('1','学生'),
-    )
     SEX = (
-        ('0','男'),
-        ('1','女'),
+        (0,'男'),
+        (1,'女'),
     )
     user = models.OneToOneField(User)
-    identity = models.CharField(max_length=2,choices=IDENTITY,default='1')
-    phonenum = models.IntegerField(null=True,blank=True )
+    phonenum = models.CharField(max_length=15,null=True,blank=True )
     nickname = models.CharField(max_length=30,null=True,blank=True)
     headimg  = models.ImageField(upload_to='img/headphoto/',null=True,blank=True)
-    sex      = models.CharField(max_length=2,choices=SEX,default='0',null=True,blank=True)
+    sex      = models.IntegerField(choices=SEX,default=0,null=True,blank=True)
     companyname  = models.CharField(max_length=100,null=True,blank=True)
+    boolServer = models.NullBooleanField()
+    server = models.OneToOneField("Servers",null=True,blank=True) 
     inTime   = models.DateTimeField(auto_now=True,auto_now_add=False)    
 
 
@@ -30,6 +27,25 @@ class School(models.Model):
     schDesc = models.TextField()
     schUrl  = models.URLField()
     schLogo = models.ImageField(upload_to='img/schoolLogo/')
+
+class Servers(models.Model):
+    CLASS = (
+        ('0','个人服务商'),
+        ('1','企业服务商'),
+        ('2','校园服务商'),
+    )
+    servername = models.CharField(max_length=100)
+    serverdesc = models.TextField()
+    serverurl  = models.URLField()
+    serverlogo = models.ImageField(upload_to='img/serverlogo/')
+    serverbanner = models.ImageField(upload_to='img/serverbanner/')
+    serverclass = models.CharField(max_length=2,choices=CLASS,default='0')
+    servertel = models.CharField(max_length=12,null=True,blank=True)
+    serveraddress = models.CharField(max_length=100,null=True,blank=True)
+
+class Lession(models.Model):
+    lessionname = models.CharField(max_length=50)
+    server = models.ForeignKey(Servers)
 
 class Course(models.Model):
     courName = models.CharField(max_length=50)
@@ -51,7 +67,7 @@ class Article(models.Model):
     companyname = models.CharField(max_length=100,null=True,blank=True)
     price   = models.IntegerField(default=0)
     img = models.ImageField(upload_to ='img/article/',null=True,help_text="封面图像",blank=True)
-    phonenum  = models.IntegerField(null=True,blank=True)
+    phonenum  = models.CharField(max_length=15,null=True,blank=True)
     email = models.EmailField(null=True,blank=True)
     endDate = models.DateTimeField(auto_now=False,auto_now_add=False)
     boolIndex = models.IntegerField(null=True,blank=True)

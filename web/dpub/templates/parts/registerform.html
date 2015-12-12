@@ -13,28 +13,30 @@
 		</div>
 		<div class="am-form-group">
 			<label for="password2">确认密码</label>
-			<input type="password" id="password2" name="conPassword" placeholder="请重复上面的密码" onblur="checkPassword(password,password2)" data-equal-to="#password" required/>
+			<input type="password" id="password2" name="conpassword" placeholder="请重复上面的密码" onblur="checkPassword(password,password2)" data-equal-to="#password" required/>
 		</div>
 		<div class="am-form-group">
 			<label for="email">邮箱</label>
 			<input type="email" id="email" name="email" placeholder="输入邮箱" required/>
 		</div>
 		<div class="am-form-group">
-			<label>你的身份：</label>
+			<label>性别：</label>
 			<label class="am-radio-inline">
-				<input type="radio" value="1" name="identity" data-am-ucheck required> 学生
+				<input type="radio" value="0" name="sex" data-am-ucheck required> 男
 			</label>
 			<label class="am-radio-inline">
-				<input type="radio" value="0" name="identity" data-am-ucheck checked> 企业
+				<input type="radio" value="1" name="sex" data-am-ucheck checked> 女
 			</label>
 		</div>
 		<div class="am-form-group">
 			<label for="phonenum">电话号码</label>
 			<input type="text" id="phonenum" name="phonenum" placeholder="输入您的电话号码" required/>
 		</div>
+		<input type="hidden" name="date_joined"/>
+
 		<div class="am-form-group">
 			<label for="company">公司或学校名称</label>
-			<input type="text" id="company" name="comanyname" placeholder="输入您的单位名称" required/>
+			<input type="text" id="companyname" name="comanyname" placeholder="输入您的单位名称" />
 		</div>
 		<button class="am-btn am-btn-primary" type="submit" id="registerButton">确认注册</button>
 		<div class="provision">

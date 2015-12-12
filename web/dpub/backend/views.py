@@ -1,5 +1,5 @@
 #coding:utf-8#
-import os
+import os,datetime
 from django.conf import settings
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
@@ -19,7 +19,7 @@ from dpub.forms import *
 
 from dpub.conf import *
 class LoginProtectedView(TemplateView): 
-    @method_decorator(login_required(redirect_field_name='next',login_url='/manage/backend/user/login'))
+    @method_decorator(login_required(redirect_field_name='next',login_url='/manage/user/login'))
     def dispatch(self,*args,**kwargs):
         return super(LoginProtectedView,self).dispatch(*args,**kwargs)
 
@@ -27,7 +27,7 @@ class LoginProtectedView(TemplateView):
 class Login(View):
     def post(self,request):
         errorText = ""
-        url = "/manage/backend/user/login/"
+        url = "/manage/user/login/"
         userName = request.POST['userName']
         password = request.POST['password']
         user = authenticate(username=userName,password=password)
@@ -35,7 +35,8 @@ class Login(View):
             if user.is_active:
                 login(request,user)
                 errorText = "恭喜你,登陆成功。"
-                url = "/manage/backend/manage/"
+                url = "/manage/manage/"
+                return HttpResponseRedirect("/manage/manage/")
             else:
                 errorText ="用户未激活,请联系客服人员！！！"
         else:
@@ -52,34 +53,67 @@ class Logout(View):
 
 class UserManage(LoginProtectedView):
     def get(self,request):
-        return HttpResponse("用户管理")
+        return render(request,"dpub/user-modify.html",{'user':request.user})
+
+    def post(self,request):
+        errorText =""
+        url = "/manage/user/add/"
+        user = request.user
+        exUserForm = ExUserForm(request.POST)
+        try:
+            if exUserForm.is_valid():
+                if exUserForm.cleaned_data['nickname']:
+                    user.exuser.nickname = exUserForm.cleaned_data['nickname']
+                if request.POST['sex']:
+                    user.exuser.sex = request.POST['sex']
+                if exUserForm.cleaned_data['phonenum']:
+                    user.exuser.phonenum = exUserForm.cleaned_data['phonenum']
+                if exUserForm.cleaned_data['companyname']:
+                    user.exuser.companyname = exUserForm.cleaned_data['companyname']
+            if request.POST['email']:
+                user.email = request.POST['email']
+            if request.POST['username']:
+                user.username = request.POST['username']
+            user.exuser.save()
+            user.save()
+            errorText = "修改成功"
+        except Exception as e:
+            errorText ="出错啦".joined(e)
+        return render(request,'message.html',{'message':'修改成功','url':'/manage/manage/'})
+        
 
 class UserAdd(View):
     def post(self,request):
         errorText =""
-        url = "/manage/backend/user/add/"
-        username = request.POST['username'] 
-        password = request.POST['password']
-        email    = request.POST['email']
-        conpassword = request.POST['conPassword']
-        identity = request.POST['identity']
-        try:
-            if password and conpassword and password == conpassword:
-                user = User.objects.create_user(username,email,password)
-                exuser= Exuser(user=user,identity=identity)
-                exuser.save()
-                customer = Group.objects.get(name='customer')
-                user.groups.add(customer)
-                user.save()
-                errorText ="恭喜您，注册成功"
-                url = "/manage/backend/user/login/"
-        except Exception as e:
-            errorText ="注册出错，请重新注册"
+        url = "/manage/user/add/"
+        conpassword = request.POST['conpassword']
+        exUserForm = ExUserForm(request.POST)
+        userForm = UserForm(request.POST)
+        if exUserForm.is_valid() and userForm.is_valid():
+            if conpassword == userForm.cleaned_data['password']:
+                try:
+                    username = userForm.cleaned_data['username']
+                    password = userForm.cleaned_data['password']
+                    email = userForm.cleaned_data['email']
+                    user = User.objects.create_user(username,email,password)
+                    customer = Group.objects.get(name='customer')
+                    user.groups.add(customer)
+                    exUser = exUserForm.save(commit=False)
+                    exUser.user = user
+                    exUser.save()
+                    user.save()
+                    errorText = "注册成功"
+                    url = "/manage/user/login/"
+                except Exception as e:
+                    errorText = e
+            else:
+                errorText ="两次输入密码不一致"
+        else:
+            errorText = exUserForm.errors.join(userForm.errors)
         return render(request,'message.html',{'message':errorText,'url':url})
 
     def get(self,request):
-        userForm = UserForm()
-        return render(request,'dpub/register.html',{'userForm':userForm})
+        return render(request,'dpub/register.html')
 
 class Manage(LoginProtectedView):
     def get(self,request):
@@ -99,10 +133,10 @@ class ArticleAdd(LoginProtectedView):
             article = articleForm.save(commit=False)
             article.user = request.user
             article.save()
-            return HttpResponse("%s , %s, %s, %s, %s, %s"%(article.title,article.content,article.img,article.phonenum,article.endDate,article.email))
-        return HttpResponse("Wrong")
+            return HttpResponse("添加成功")
+        return HttpResponse("%s" %articleForm.errors)
 
-@login_required(redirect_field_name='next',login_url='/manage/backend/user/login')
+@login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articlesManage(request,page):
     user = request.user
     articleList = Article.objects.filter(user=user)
@@ -117,7 +151,7 @@ def articlesManage(request,page):
         articles = paginator.page(paginator.num_pages)
     return render(request,'ajax/article.html',{'articles':articles})
 
-@login_required(redirect_field_name='next',login_url='/manage/backend/user/login')
+@login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articleUpdate(request,pk):
     if request.method == "GET":
         article = Article.objects.get(pk=pk)
@@ -127,10 +161,11 @@ def articleUpdate(request,pk):
         return HttpResponse("POST")
 
 
-@login_required(redirect_field_name='next',login_url='/manage/backend/user/login')
+@login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articleDel(request,pk):
     Article.objects.get(pk=pk).delete()
     articleList = Article.objects.filter(user=request.user)
     paginator = Paginator(articleList,ARTICLE_NUMS)
     articles = paginator.page(1)
     return render(request,'ajax/article.html',{'articles':articles})
+

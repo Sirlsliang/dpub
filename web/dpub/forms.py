@@ -8,6 +8,7 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = '__all__'
+        exclude =['date_joined']
 
 class ExUserForm(ModelForm):
     class Meta:

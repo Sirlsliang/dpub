@@ -1,9 +1,9 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% load staticfiles %}
-{% block title%}用户管理{% endblock%}
-{% block navigator %}{% include "parts/navigator.html"%} {% endblock %}
-{% block content%}
-<div class="s-title">
+{% block title %}用户管理 {% endblock%}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock%}
+{% block content %}
+	<div class="s-title">
 		<div class="am-g am-container">
 			<div class="am-u-lg-12" style="position:relative;">
 				<h1 class="server-title">用户管理</h1>
@@ -13,41 +13,78 @@
 	<div class="outer user">
 		<div class="am-g am-container">
 			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					基本信息
+				</div>
 				<div class="content-box">
 					<div class="user-head">
-						<img src="{% static 'img/user-head.png' %}" alt="">
-						<h4><a href="#">修改资料</a></h4>
+						{% if user.exuser.sex > 0%}
+						<img src="{% static 'img/user-head-female.jpg'%}" alt="" class="female">
+						{% else %}
+						<img src="{% static 'img/user-head.png'%}" alt="" class="female">
+						{% endif %}
 					</div>
-					<div class="user-info">
-						<div class="info-line"><span>用户名</span><span class="info">{{ user.username }}</span></div>
-						<div class="info-line"><span>电&nbsp;&nbsp;&nbsp;&nbsp;话</span><span class="info">{{ user.exuser.identity }}<span></div>
-						<div class="info-line"><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span><span class="info">{{ user.email }}</span></div>
+					<div class="basic-info">
+						<ul class="info-block">
+							<li>
+								<span class="lab">用户名</span>
+								<span class="info">{{ user.username }}</span>
+							</li>
+							<li>
+								<span class="lab">昵称</span>
+								<span class="info">{{ user.exuser.nickname }}</span>
+							</li>
+							<li>
+								<span class="lab">性别</span>
+								<span class="info">
+									{% if user.exuser.sex > 0%}
+									女
+									{%else%}
+									男
+									{% endif %}
+								</span>
+							</li>
+						</ul>
+						<ul class="info-block">
+							<li>
+								<span class="lab">电话</span>
+								<span class="info">{{ user.exuser.phonenum}}</span>
+							</li>
+							<li>
+								<span class="lab">邮箱</span>
+								<span class="info">{{ user.email}}</span>
+							</li>
+							<li>
+								<span class="lab">所在公司</span>
+								<span class="info">{{ user.exuser.companyname }}</span>
+							</li>
+						</ul>
 					</div>
+					<a class="btn modify-btn" href="{% url 'userManage'%}"></a>
 					<div class="clear"></div>
 				</div>
 			</div>
 		</div>
 		<div class="am-g am-container">
 			<div class="am-u-lg-12 content-wrapper">
-				<div class="r-btns">
-					<div class="r-btn active">发布管理</div>
-					<div class="r-btn"><a href="{% url 'articleAdd' %}" >发布需求</a></div>
-				</div>
+				<div class="content-title">
+					发布管理
+				</div>	
 				<script>
 					function getTheArticle(page){
-						$.get("/manage/backend/article/"+page+"/",
+						$.get("/manage/article/"+page+"/",
 							function(data){
-								$("#articleBox").html(data);
+								$("#contentBox").html(data);
 							}
 						);
 					}
 					function articleDel(id){
 						if(confirm("您确定要删除该文章？？")){
 							$.get(
-								"/manage/backend/article/del/"+id+"/",
+								"/manage/article/del/"+id+"/",
 								function(data){
 									alert("删除成功");
-									$("#articleBox").html(data);
+									$("#contentBox").html(data);
 								}
 							);
 						}
@@ -56,20 +93,22 @@
 						getTheArticle(1);
 					});
 				</script>
-				<div class="content-box" id="articleBox">
+
+				<div class="content-box" id="contentBox">
 				</div>
 			</div>
 		</div>
 		<div class="am-g am-container">
 			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					我收藏的需求
+				</div>
 				<div class="content-box">
-					<h2>我收藏的需求</h2>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="{% static 'js/index/index.js' %}"></script>
-	{% endblock%}
-	{% block footer%}
+	{% endblock %}
+	{% block footer %}
 		{% include 'parts/footer.html'%}
 	{% endblock %}
