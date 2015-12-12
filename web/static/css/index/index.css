@@ -3,6 +3,10 @@ p {
 	margin:0;
 }
 
+ul,li {
+	list-style: none;
+}
+
 .am-container, .am-g-fixed {
 	max-width: 1228px;
 }
@@ -19,6 +23,12 @@ p {
 
 @media (max-width: 808px) {
 	.icon-text {
+		display: none;
+	}
+}
+
+@media (max-width: 875px) {
+	.am-topbar-brand span {
 		display: none;
 	}
 }
@@ -404,6 +414,8 @@ label {
 .cat-list {
 	list-style: none;
 	padding:0;
+	width: 90%;
+	margin:20px auto;
 }
 
 .cat-list span {
@@ -556,3 +568,324 @@ label {
     -webkit-box-shadow: 0 2px 0 #0662a6, 0 3px 3px rgba(0, 0, 0, 0.2);
             box-shadow: 0 2px 0 #0662a6, 0 3px 3px rgba(0, 0, 0, 0.2); }
 
+
+/*servers*/
+.s-title {
+	background-color: #21a4d5;
+
+}
+
+.s-title .server-title {
+	margin:0;
+	height: 64px;
+	line-height: 64px;
+	width: 214px;
+	text-align: center;
+	color: #fff;
+	background-color: #0484b4;
+	letter-spacing: 5px;
+	font-weight: normal;
+}
+
+.outer {
+	background: #e8f6fb;
+}
+
+.am-breadcrumb {
+	font-size: 1.8rem;
+	margin-bottom: 0;
+}
+
+.content-wrapper {
+	background: #fff;
+	padding:20px;
+}
+
+.content-wrapper .content-box {
+	border:1px solid #acdff2;
+	min-height: 300px;
+	position: relative;
+}
+
+.content-box h2 {
+	color: #086e94;
+	padding: 10px 15px;
+}
+
+.content-box .main-list li {
+	float: left;
+}
+
+.content-box .cat-list li {
+	background: none;
+	color:#21a4d5;
+}
+
+/*server-tabs*/
+.box-tabs .box-tabs-nav {
+	background: #68d5fd;
+	width: 100%;
+	height: 40px;
+	padding-left: 0;
+}
+
+.box-tabs .box-tabs-nav li {
+	float: left; 
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+}
+
+.server-tabs-nav li {
+	width: 25%;
+}
+
+.box-tabs .box-tabs-nav li:hover {
+	background: #21a4d5;
+}
+
+.box-tabs .box-tabs-nav li a {
+	color: #fff;
+}
+
+.box-tabs .box-tabs-nav .active {
+	background: #21a4d5;
+}
+
+.server-box {
+	height: 300px;
+	margin-bottom: 10px;
+}
+
+.server-box .server-content {
+	width: 95%;
+	margin:0px auto;
+	background: #e8f6fb;
+	height: 100%;
+}
+
+.server-box .server-content .school-logo,.server-box .server-content .server-btns {
+	width: 100%;
+}
+
+.server-box .server-content .school-logo {
+	padding: 10px;
+}
+
+.server-box .server-content .server-btns {
+	text-align: center;
+	padding: 10px;
+}
+
+.server-box .server-content .server-btns p {
+	padding: 5px 10px;
+	background: #d2f3fe;
+	margin-bottom: 10px;
+}
+
+.server-box .server-content .school-info {
+	color: #036589;
+	/*text-align: center;*/
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.school-info h3 {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.server-box .server-content .school-info p {
+	color: #5da6c1;
+}
+
+.server-tabs-bd .server-tab-panel {
+	opacity: 0;
+	display: none;
+	transition:opacity 0.5s;
+}
+
+.server-tabs-bd .active {
+	display: block;
+	opacity: 1;
+	transition:opacity 0.5s;
+}
+
+
+/*user-admin-modify*/
+.content-title {
+	width: 170px;
+	height: 42px;
+	text-align: center;
+	line-height: 42px;
+	color: #fff;
+	background: #21a4d5;
+	border-radius: 5px 5px 0 0;
+}
+
+.content-box .user-head {
+	margin-top:50px;
+	margin-left: 60px;
+	margin-right: 100px;
+	width: 138px;
+	height: 138px;
+	float: left;
+}
+
+.content-box .modify-info {
+	float: left;
+	padding-top: 40px;
+	width: 315px;
+}
+
+@media(max-width: 710px) {
+	.content-box .user-head {
+		margin:30px auto 0;
+		float: none;
+	}
+
+	.content-box .modify-info {
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+.content-box .user-head img {
+	width: 100%;
+}
+
+.am-form .am-form-group .input {
+	display: inline-block;
+	width: 200px;
+}
+
+.modify-info .am-form .am-form-group label {
+	color: #086e94;
+	font-weight: bold;
+	margin-right: 10px;
+	width: 80px;
+	text-align: center;
+}
+
+#save {
+	margin-left:100px;
+}
+
+.clear {
+	clear:both;
+}
+
+.changePsw .modify-info {
+	margin-left: 298px;
+}
+
+@media(max-width: 710px) {
+	.changePsw .modify-info {
+		margin:0 auto;
+	}
+}
+
+
+/*user-admin-info*/
+.basic-info {
+	margin-top: 50px;
+}
+
+.basic-info,.basic-info .info-block {
+	float: left;
+}
+
+.basic-info .info-block {
+	margin:0;
+	width: 300px;
+}
+
+.basic-info .info-block li {
+	color: #086e94;
+	font-size: 18px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.basic-info .info-block .lab {
+	display: inline-block;
+	width: 72px;
+}
+
+.basic-info .info-block .info {
+	margin-left: 10px;
+	text-decoration: underline;
+}
+
+
+.content-box .btn {
+	position: absolute;
+	width: 145px;
+	height: 86px;
+	top: -21px;
+	right: -10px;
+	display: block;
+}
+
+.content-box .modify-btn {
+	background: url(../img/modify-btn.png) no-repeat;
+}
+
+.content-box .add-btn {
+	background: url(../img/add-btn.png) no-repeat;
+	right: -13px;
+}
+
+.content-box table {
+	margin-top: 55px;
+	color:#f36a40;
+	font-weight: 600;
+}
+
+/*demand*/
+.demand-tabs-nav li{
+	width: 25%;
+}
+
+@media(max-width: 640px) {
+	.demand-tabs-nav li{
+		width: 50%;
+	}
+}
+
+.content-box.demand {
+	background: #21a4d5;
+	color: #fff;
+}
+
+.content-box.demand .cat-list li {
+	color: #fff;
+}
+
+.lisk-task tr {
+	border-bottom: 1px dashed #ddd;
+}
+
+.list-task td {
+	padding:15px 10px;
+	vertical-align: top;
+}
+
+.content-box .list-task {
+	margin: 0 auto;
+	width: 90%;
+}
+
+.list-sorttag {
+	margin-left: 45px;
+	margin-bottom: 10px;
+}
+
+.list-sorttag a {
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	padding:0 11px;
+}
