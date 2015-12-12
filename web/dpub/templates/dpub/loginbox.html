@@ -1,0 +1,21 @@
+				<div class="register-form">
+					<form action="{% url 'userLogin'%}" method="POST" id="signupForm" class="am-form" data-am-validator>
+						{% csrf_token %}
+						<fieldset>
+							<legend>登陆数字网</legend>
+							<div class="am-form-group">
+								<label for="username">用户名</label>
+								<input type="text" id="username" name="userName" minlength="3" placeholder="请输入用户名/邮箱" required/>
+							</div>
+							<div class="am-form-group">
+								<label for="password">密码</label>
+								<input type="password" name="password" id="password" placeholder="请输入密码" pattern="^\w{6,}$" data-foolish-msg="请填写密码" required/>
+								<a href="#" class="fg-psw">忘记密码？</a>
+							</div>
+							<button class="am-btn am-btn-primary" type="submit" id="right-now">立即登陆</button>
+							<div class="go-reg">
+								<p>还没有数字网账号？<a href="#">立即注册 <span class="am-icon-arrow-circle-right"></span></a></p>
+							</div>
+						</fieldset>
+					</form>
+				</div>

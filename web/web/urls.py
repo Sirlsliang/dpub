@@ -20,6 +20,7 @@ from dpub.views import IndexView
 urlpatterns = [
     #url(r'^',include('dpub.urls')),
     url(r'^$',IndexView.as_view()),
+    url(r'^index.html$',IndexView.as_view()),
     url(r'^user/',include('dpub.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -9,7 +9,7 @@
 	<link rel="icon" href="{% static 'img/logo.png'%}">
 	<title>注册</title>
 	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'css/index.css' %}">
+	<link rel="stylesheet" href="{% static 'css/index/index.css' %}">
 	<style>
 	.header {
 		position: relative;
@@ -76,53 +76,7 @@
 		</a>
 	</div>
 	<div class="content-box">
-		<div class="register-form">
-			<form action="" method="POST" id="registerForm" class="am-form" data-am-validator>
-				<fieldset>
-					<legend>注册账号，免费加入数字网</legend>
-					<div class="am-form-group">
-						<label for="username">用户名</label>
-						<input type="text" id="username" minlength="3" placeholder="输入用户名（至少三个字符）" required/>
-					</div>
-					<div class="am-form-group">
-						<label for="email">邮箱</label>
-						<input type="email" id="email" placeholder="输入邮箱" required/>
-					</div>
-					<div class="am-form-group">
-						<label for="password">密码</label>
-						<input type="password" id="password" placeholder="请输入六位以上的数字字母组合" pattern="^\w{6,}$" data-foolish-msg="请填写密码" required/>
-					</div>
-					<div class="am-form-group">
-						<label for="password2">确认密码</label>
-						<input type="password" id="password2" placeholder="请重复上面的密码" data-equal-to="#password" required/>
-					</div>
-					<div class="am-form-group">
-						<label>你的身份：</label>
-						<label class="am-radio-inline">
-							<input type="radio" value="" name="identity" data-am-ucheck required> 学生
-						</label>
-						<label class="am-radio-inline">
-							<input type="radio" name="identity" data-am-ucheck checked> 企业
-						</label>
-					</div>
-					<div class="am-form-group">
-						<label for="">验证码：</label>
-						<input type="text" name="captcha" maxlength="4" class="captcha" id="captcha" required>
-						<img src="http://www.dajie.com/captcha/code?t1448356219136" alt="" class="captcha-img captchChange">
-						<button class="am-btn am-btn-primary repeat-btn" type="button"><span class="am-icon-repeat"></span></button>
-					</div>
-					<button class="am-btn am-btn-primary" type="submit">确认注册</button>
-					<div class="provision">
-						我已阅读并同意
-						<a href="#" target="_blank">数字网服务协议</a>
-					</div>
-				</fieldset>
-			</form>
-			<form action="$$$" method="post">
-				{% csrf_token %}
-				{{ form }}
-			</form>
-		</div>
+		{% include 'dpub/registerform.html'%}
 	</div>
 	<div class="footer">
 		<h4 class="slogan">—— 专注数字出版 ——</h4>

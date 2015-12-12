@@ -7,7 +7,7 @@ class UserForm(forms.Form):
         ('1','企业'),
         ('0','学生'),
     )
-    userName = forms.CharField(label='用户名',max_length=99)
+    userName = forms.CharField(label='用户名',max_length=99,error_messages={'required':'请输入用户'})
     password = forms.CharField(label='密码',max_length=100)
     conPassword = forms.CharField(label='确认密码',max_length=100)
     email = forms.EmailField()
