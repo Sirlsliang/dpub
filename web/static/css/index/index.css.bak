@@ -830,11 +830,11 @@ label {
 }
 
 .content-box .modify-btn {
-	background: url(/static/img/modify-btn.png) no-repeat;
+	background: url(../img/modify-btn.png) no-repeat;
 }
 
 .content-box .add-btn {
-	background: url(/static/img/add-btn.png) no-repeat;
+	background: url(../img/add-btn.png) no-repeat;
 	right: -13px;
 }
 

@@ -2,10 +2,10 @@
 import os
 from datetime import *
 from django.conf import settings
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 
-from django.views.generic import View,ListView
+from django.views.generic import View,ListView,DetailView
 from django.views.generic import TemplateView
 
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -31,6 +31,18 @@ class ServersView(View):
         allServiceModel = ServiceModel.objects.all()
         schools = School.objects.all()
         return render(request,'dpub/servers.html',{'schools':schools,'allServiceModel':allServiceModel})
+
+def articleDetail(request,articleId):
+    article = get_object_or_404(Article,pk=articleId)
+    return render(request,'dpub/article.html',{'article':article})
+
+def serviceArticle(request,serviceModelId):
+    articles = Article.objects.filter(servicemodel=serviceModelId)
+    return render(request,'dpub/articles.html',{"articles":articles})
+
+def classArticle(request,serviceModelId,classModelId):
+    articles = Article.objects.filter(servicemodel=serviceModelId).filter(classmodel=classModelId)
+    return render(request,'dpub/articles.html',{"articles":articles})
 
 
 def page_not_found(request):

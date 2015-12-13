@@ -22,14 +22,14 @@
 					<div class="am-form-group">
 					
 						<label for="chooseInput">选择需求类别</label>
-						<select name="serviceModel">
+						<select name="servicemodel">
 							{% for serviceModel in allServiceModel%}
 							<option value="{{ serviceModel.id}}">
 									{{ serviceModel.modelName}}
 							</option>
 							{% endfor %}
 						</select>
-						<select name="classify">
+						<select name="classmodel">
 							{% for serviceModel in allServiceModel%}
 								{% for model in serviceModel.classModel.all %}
 									<option value="{{ model.id}}">

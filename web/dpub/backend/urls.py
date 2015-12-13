@@ -10,6 +10,7 @@ urlpatterns =[
     url(r'^user/logout/$',Logout.as_view(),name='userLogout'),
     url(r'^user/add/$',UserAdd.as_view(),name='userAdd'),
     url(r'^user/manage',UserManage.as_view(),name='userManage'),
+    url(r'^user/password',changePassword,name="userPassword"),
     url(r'^manage/$',Manage.as_view(),name='backendManage'),
     url(r'^article/add$',ArticleAdd.as_view(),name='articleAdd'),       
     url(r'^article/(?P<page>[0-9]+)/$',articlesManage,name='articlesManage'),

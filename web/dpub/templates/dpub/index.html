@@ -21,7 +21,7 @@
 				<p class="detail-title">{{ serviceModel.modelName }}</p>
 				<div class="classify plain">
 					{% for model in serviceModel.classModel.all %}
-					<p><a href="#">{{ model.className}}</a></p>
+					<p><a href="/get/model/articles/{{serviceModel.id}}/{{model.id}}/">{{ model.className}}</a></p>
 					{% endfor %}
 					<div class="arrow"></div>
 				</div>
@@ -64,11 +64,17 @@
 				<div class="am-g">
 					{% for article in articles %}
 					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
+						{% if article.img %}
 						<div class="image">
 							<img src=" /upload/{{ article.img }} " alt="">
 						</div>
+						{% else%}
+						<div class="image">
+							<img src=" {% static 'img/index/pic10.jpg'%} " alt="">
+						</div>
+						{% endif %}
 						<div class="text">
-							<h2 class="text-title">{{ article.title}}</h2>
+							<h2 class="text-title"><a href="/get/article/article/{{article.id}}/">{{ article.title}}</a></h2>
 							<p>{{ article.content|slice:"40" }}......</p>
 						</div>
 					</div>

@@ -61,7 +61,8 @@ class ClassModel(models.Model):
 
 class Article(models.Model):
     user = models.ForeignKey(User)
-    classify = models.ForeignKey(ClassModel)
+    classmodel = models.ForeignKey(ClassModel)
+    servicemodel = models.ForeignKey(ServiceModel)
     title = models.CharField(max_length=200)
     content = models.TextField()
     companyname = models.CharField(max_length=100,null=True,blank=True)

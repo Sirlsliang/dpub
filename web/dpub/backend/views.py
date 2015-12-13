@@ -50,6 +50,25 @@ class Logout(View):
     def get(self,request):
         logout(request)
         return HttpResponseRedirect('/')
+def changePassword(request):
+    if request.method =="POST":
+        url = "/manage/manage/"
+        errorText =""
+        password = request.POST['password']
+        newpassword = request.POST['newpassword']
+        connewpassword = request.POST['connewpassword']
+        if authenticate(username=request.user.username,password=password):
+            user = request.user
+            if newpassword and  newpassword == connewpassword:
+                user.set_password(newpassword)
+                user.save()
+                logout(request)
+                errorText = "密码修改成功"
+            else:
+                errorText = "两次密码输入不一致"
+        else:
+            errorText = "原始密码输入错误"
+        return render(request,'message.html',{"message":errorText,"url":url})        
 
 class UserManage(LoginProtectedView):
     def get(self,request):
@@ -127,14 +146,15 @@ class ArticleAdd(LoginProtectedView):
         allServiceModel = ServiceModel.objects.all()
         articleForm = ArticleForm()
         return render(request,'dpub/release.html',{'allServiceModel':allServiceModel,'articleForm':articleForm,})
+
     def post(self,request):
         articleForm = ArticleForm(request.POST,request.FILES)
         if articleForm.is_valid():
             article = articleForm.save(commit=False)
             article.user = request.user
             article.save()
-            return HttpResponse("添加成功")
-        return HttpResponse("%s" %articleForm.errors)
+            return render(request,'message.html',{'message':'添加成功','url':'/manage/manage/'})
+        return render(request,'message.html',{'message':'访问出错'.join(articleForm.errors),'url':'/manage/manage/'})
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articlesManage(request,page):

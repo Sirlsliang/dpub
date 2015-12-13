@@ -81,19 +81,20 @@
 				</div>
 				<div class="content-box changePsw">
 					<div class="modify-info">
-						<form action="" method="POST" id="changePswForm" class="am-form" data-am-validator>
+						<form action="{% url 'userPassword'%}" method="POST" id="changePswForm" class="am-form" data-am-validator>
+							{% csrf_token %}
 							<fieldset>
 								<div class="am-form-group">
 									<label for="currentPsw">当前密码</label>
-									<input type="password" id="currentPsw" placeholder="请输入3-12个字符" class="input" pattern="^\w{3,12}$">
+									<input type="password" name="password" id="currentPsw" placeholder="请输入3-12个字符" class="input" pattern="^\w{3,12}$">
 								</div>
 								<div class="am-form-group">
 									<label for="newPsw">设置新密码</label>
-									<input type="password" id="newPsw" placeholder="请输入3-12个字符" class="input" pattern="^\w{3,12}$">
+									<input type="password" id="newPsw" name="newpassword"  placeholder="请输入3-12个字符" class="input" pattern="^\w{3,12}$">
 								</div>
 								<div class="am-form-group">
 									<label for="confirmPsw">确认新密码</label>
-									<input type="password" id="confirmPsw" placeholder="请再次输入您的新密码" class="input" data-equal-to="#newPsw">
+									<input type="password" name="connewpassword" id="confirmPsw" placeholder="请再次输入您的新密码" class="input" data-equal-to="#newPsw">
 								</div>
 								<button class="am-btn am-btn-primary" type="submit" id="save">保存</button>
 							</fieldset>
