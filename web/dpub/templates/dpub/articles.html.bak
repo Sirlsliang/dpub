@@ -1,0 +1,140 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title%}首页{% endblock %}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock %}
+{% block content %}	
+<div class="s-title">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12" style="position:relative;">
+			<h1 class="server-title">需求市场库</h1>
+		</div>
+	</div>
+</div>
+<div class="demand outer">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12">
+			<ol class="am-breadcrumb">
+				<li><a href="/index.html" class="am-icon-home"> 首页</a></li>
+				<li class="am-active">需求信息</li>
+			</ol>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="content-box demand">
+				<ul class="cat-list">
+					<li>全部需求</li>
+					{% for servicemodel in allservicemodel %}
+					<li>
+						<a href="/get/articles/{{servicemodel.id}}/1/">
+						{{servicemodel.modelname }}
+						</a>
+						{% if servicemodel.classmodel%}
+						<ul class="sub-list">
+							{% for model in servicemodel.classmodel.all %}
+							<li>
+								<a href="/get/articles/{{ servicemodel.id}}/{{model.id}}/1/">
+									{{ model.classname }}
+								</a>
+							</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="content-box">
+				<div class="box-tabs">
+					<ul class="box-tabs-nav demand-tabs-nav">
+						<li class="active"><a href="#tab1">进行中</a></li>
+						<li class=""><a href="#tab2">已结束</a></li>
+					</ul>
+					<div class="server-tabs-bd">
+						<div class="server-tab-panel active" id="tab1">
+							<div class="list-sorttag">
+								<a href="#">综合</a>
+								<a href="#">发布时间 <span class="am-icon-angle-down"></span></a>
+								<a href="#">剩余时间 <span class="am-icon-angle-down"></span></a>
+								<a href="#">价格 <span class="am-icon-angle-down"></span></a>
+							</div>
+							<table class="am-table am-table-bordered am-table-radius am-table-hover list-task">
+								<tbody>
+									{% for article in articles %}
+									<tr>
+										<td>
+											<p>
+											<em class="list-task-reward">￥{{article.price}}</em>	
+											</p>
+										</td>
+										<td>
+											<p>
+											<a href="/get/article/{{ article.id}}/" class="list-task-title" title="{{article.title}}" target="_blank">{{article.title}}</a>
+											</p>
+											<p class="list-task-ctn">{{article.content|slice:"10"}}</p>
+										</td>
+										<td>
+											<span>{{article.endDate|date:"Y-m-d"}}</span>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						<div class="server-tab-panel" id="tab2">
+							<div class="list-sorttag">
+								<a href="#">综合</a>
+								<a href="#">发布时间 <span class="am-icon-angle-down"></span></a>
+								<a href="#">剩余时间 <span class="am-icon-angle-down"></span></a>
+								<a href="#">价格 <span class="am-icon-angle-down"></span></a>
+							</div>
+							<table class="am-table am-table-bordered am-table-radius am-table-hover list-task">
+								<tbody>
+									{% for article in outArticles %}
+									<tr>
+										<td>
+											<p>
+											<em class="list-task-reward">￥{{article.price}}</em>	
+											</p>
+										</td>
+										<td>
+											<p>
+											<a href="/get/article/{{article.id}}/" class="list-task-title" title="{{article.title}}" target="_blank">{{article.title}}</a>
+											</p>
+											<p class="list-task-ctn">{{article.content|slice:"10"}}</p>
+										</td>
+										<td>
+											<span>{{article.endDate|date:"Y-m-d"}}</span>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<ul class="am-pagination am-pagination-centered">
+					{% if articles.has_previous %}
+					<li><a href="/get/articles/{{serviceId}}{% if classId %}/{{classId}}/{% endif%}/{{articles.previous_page_number}}/">&laquo; 上一页</a></li>
+					{% else %}
+					<li class="am-disabled"><a href="">&laquo; 上一页</a></li>
+					{% endif %}
+					{% if articles.has_next%}
+					<li><a href="/get/articles/{{serviceId}}{% if classId %}/{{classId}}/{% endif%}/{{articles.next_page_number }}/">下一页 &raquo;</a></li>
+					{% else %}
+					<li class="am-disabled"><a href="">下一页 &raquo;</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block footer%}
+{% include "parts/footer.html"%}
+{% endblock %}
+

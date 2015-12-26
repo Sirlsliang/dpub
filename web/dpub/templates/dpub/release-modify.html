@@ -1,0 +1,126 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title %} 发布需求{% endblock %}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock%}
+{% block content %}
+	<div class="s-title">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12" style="position:relative;">
+				<h1 class="server-title">需求发布</h1>
+			</div>
+		</div>
+	</div>
+	<div class="outer user">
+		<form action="/manage/article/update/{{article.id}}/" method="POST" id="releaseForm" class="am-form" enctype="multipart/form-data">
+			<input type="hidden" value="{{article.id}}" name="id">
+			{% csrf_token %}
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title orange">
+					需求详情
+				</div>
+				<div class="content-box">
+					<div class="release-info">
+						<div class="am-form-group">
+							<label for="sim-describe">简单描述</label>
+							<input name="title" type="text" id="sim-describe" placeholder="" class="input"value="{{article.title}}"> 
+						</div>
+						<script>
+							function getTheClassModel(){
+								id =$("#category-selected").val()
+								selBox = $("#classSelect")
+								$.get(
+									'/get/classmodel/'+id+'/',
+									function (data){
+										selBox.html(data);
+									}
+								);
+
+							
+							}
+							$(function(){
+								getTheClassModel()
+							});
+						</script>
+						<div class="am-form-group">
+							<!--<p><span>文章类别</span><span>{{article.servicemodel.modelName}}</span><span>{{article.classmodel.className}}</span></p>-->
+							<label for="username">选择类别</label>
+								<select data-am-selected name="servicemodel" placeholder="选择类别" id="category-selected" onchange="getTheClassModel()">
+									{% for serviceModel in allServiceModel%}
+									<option label="{{serviceModel.modelName}}" value="{{serviceModel.id}}"
+										{% if serviceModel.id == article.servicemodel.id%} selected{% endif %}
+									>
+											{{serviceModel.modelName}}
+										</option>
+									{% endfor %}
+								</select>
+							<select name="classmodel"  data-am-selected placeholder="详细类别" class="sub-category" id="classSelect">
+							</select>
+						</div>
+						<div class="am-form-group">
+							<label for="desTextarea">制作要求</label>
+							<textarea name="content" laceholder="制作要求" id="desTextarea"> {{article.content}} </textarea>
+						</div>
+						<div class="des-input">
+							{% if article.img %}
+								<img src="/upload/{{article.img}}" width="300" height="200"/>
+							{% endif %}
+						</div>
+						<div class="am-form-group am-form-file des-input">
+	  						<button type="button" class="am-btn am-btn-primary am-btn-sm">
+	    						<i class="am-icon-cloud-upload"></i> 选择要上传的文件
+	    					</button>
+	  						<input type="file" name="img" id="des-file-input" multiple>
+	  						<div id="file-list"></div>
+						</div>
+						
+						<div class="am-form-group">
+							<label for="timeInput">完成时间</label>
+							<input name="endDate" type="text" placeholder="完成时间" id="timeInput" class="input" data-am-datepicker required value="{{article.endDate|date:"Y-m-d"}}">
+						</div>
+						<div class="am-form-group">
+							<label for="priceInput">设置价格</label>
+							<input name="price" type="text" id="priceInput" placeholder="" class="input" pattern="^\d+$"value="{{article.price}}">
+							<label>元</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					联系方式
+				</div>
+				<div class="content-box">
+					<div class="release-info">
+						<div class="am-form-group">
+							<label for="comInput">单位名称</label>
+							<input type="text" name="companyname" id="comInput" placeholder="" class="input" value="{{article.companyname|default:""}}" >
+						</div>
+						<div class="am-form-group">
+							<label for="nameInput">姓名</label>
+							<input name="usernickname" type="text" id="nameInput" placeholder="" class="input" value="{{article.usernickname|default:""}}">
+						</div>
+						<div class="am-form-group">
+							<label for="telInput">电话</label>
+							<input name="phonenum" type="text" id="telInput" placeholder="" class="input" value="{{article.phonenum|default:""}}">
+						</div>
+						<div class="am-form-group">
+							<label for="emailInput">电子邮件</label>
+							<input type="text" name="email" id="emailInput" placeholder="" class="input" value="{{article.email|default:""}}" > 
+						</div>
+						<div class="am-form-group" id="release">
+							<button type="submit" id="submit-btn" class="button-3d button-primary"><span class="am-icon-rocket"></span> 发布</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	{%  endblock %}
+	{% block footer %}
+		{% include "parts/footer.html"%}
+	{% endblock %}
+	

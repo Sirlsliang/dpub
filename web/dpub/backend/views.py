@@ -34,8 +34,6 @@ class Login(View):
         if user is not None:
             if user.is_active:
                 login(request,user)
-                errorText = "恭喜你,登陆成功。"
-                url = "/manage/manage/"
                 return HttpResponseRedirect("/manage/manage/")
             else:
                 errorText ="用户未激活,请联系客服人员！！！"
@@ -50,6 +48,7 @@ class Logout(View):
     def get(self,request):
         logout(request)
         return HttpResponseRedirect('/')
+
 def changePassword(request):
     if request.method =="POST":
         url = "/manage/manage/"
@@ -148,18 +147,25 @@ class ArticleAdd(LoginProtectedView):
         return render(request,'dpub/release.html',{'allServiceModel':allServiceModel,'articleForm':articleForm,})
 
     def post(self,request):
+        user = request.user
         articleForm = ArticleForm(request.POST,request.FILES)
         if articleForm.is_valid():
             article = articleForm.save(commit=False)
+            if not article.usernickname:
+                article.usernickname = user.exuser.nickname
+            if not article.phonenum:
+                article.phonenum = user.exuser.phonenum
+            if not article.email:
+                article.email = user.email
             article.user = request.user
             article.save()
             return render(request,'message.html',{'message':'添加成功','url':'/manage/manage/'})
         return render(request,'message.html',{'message':'访问出错'.join(articleForm.errors),'url':'/manage/manage/'})
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
-def articlesManage(request,page):
+def articlesManage(request,boolWorks,page):
     user = request.user
-    articleList = Article.objects.filter(user=user)
+    articleList = Article.objects.filter(user=user).filter(boolWorks=boolWorks)
     paginator = Paginator(articleList,ARTICLE_NUMS)
     if not page:
         page = 1
@@ -169,17 +175,25 @@ def articlesManage(request,page):
         articles = paginator.page(1) 
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
-    return render(request,'ajax/article.html',{'articles':articles})
+    return render(request,'ajax/article.html',{'articles':articles,'boolWorks':boolWorks})
+
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articleUpdate(request,pk):
     if request.method == "GET":
         article = Article.objects.get(pk=pk)
-        articleForm = ArticleForm(instance=article)
-        return render(request,'dpub/article.html',{'article':articleForm })
-    else:
-        return HttpResponse("POST")
-
+        allServiceModel = ServiceModel.objects.all()
+        return render(request,'dpub/release-modify.html',{'article':article,"allServiceModel":allServiceModel})
+    if request.method == "POST":
+        user = request.user
+        articleForm = ArticleForm(request.POST,request.FILES)
+        if articleForm.is_valid():
+            article = articleForm.save(commit=False)
+            article.id = pk
+            article.user = user
+            article.save()
+            return render(request,'message.html',{'message':'修改成功','url':'/manage/manage/'})
+        return HttpResponse(articleForm.errors)
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articleDel(request,pk):

@@ -87,4 +87,14 @@ $(function() {
     }
 
     serverTab('.box-tabs-nav li','.server-tab-panel');
+
+    //选择框联动
+    $('.am-form .sub-category').eq(0).next('.am-selected').css({display:'inline-block'})
+    
+
+    //留言板数量
+    var commentsNum = 0;
+    commentsNum = $('.am-comment').length;
+    $('.number').text(commentsNum);
+    
 })

@@ -1,0 +1,724 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="author" content="rockhentai">
+	<link rel="icon" href="{% static 'img/logo.png' %}">
+	<title>联系我们</title>
+	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
+	<style>
+	html {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: #faf8f8;
+		padding:0;
+	}
+
+	.container {
+		max-width:1440px;
+		width: 100%;
+		margin:0 auto;
+	}
+	
+	.page {
+		width: 100%;
+	}
+
+	.r-img {
+		width: 100%;
+	}
+	
+	.t-img {
+		display: block;
+		width: 80%;
+		max-width: 205px;
+		min-width: 140px;
+		margin:0 auto;
+		position: relative;
+	}
+
+	.t-img img {
+		position: absolute;
+		width: 100%;
+	}
+
+	.about-us {
+		height: 740px;
+		background: url(/static/img/c-bg.jpg) no-repeat 0 200px;
+	}
+
+	.page-title {
+		width: 27%;
+		min-width: 250px;
+		max-width: 397px;
+		margin:0 auto;
+		/*margin-top: 82px;*/
+		padding-top: 82px;
+		position: relative;
+		text-align: center;
+		font-size: 30px;
+		font-weight: bold;
+		color: #000;
+	}
+	
+	.i_name em {
+		color: #00A3DF;
+		font-style: normal;
+	}
+
+	.i_name p {
+	    font-size: 18px;
+	    color: #5B5B5B;
+	}
+
+	.tech {
+		margin-top:80px;
+	}
+
+	.tech .t-box {
+		margin-bottom: 20px;
+		height: 197px;
+	}
+	
+	.team-members {
+		width: 100%;
+		margin-top:30px;
+	}
+
+	.mate-box {
+		width: 66%;
+		max-width: 961px;
+		margin:0 auto;
+	}
+	
+	.head {
+		width: 31%;
+		max-width: 300px;
+		min-width: 150px;
+		text-align: center;
+	}
+
+	.head h1 {
+		margin-top: 10px;
+	}
+
+	.head .h-img {
+		width: 100%;
+		position: relative;
+	}
+
+	.h-img img {
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	
+	.boss {
+		margin-bottom: 30px;
+	}
+
+	.boss .head {
+		margin:0 auto;
+	} 
+	
+	.infomation {
+		color: #000;
+		width:64%;
+		max-width: 614px;
+		min-width: 240px;
+		font-size: 18px;
+		position: relative;
+	}
+
+	.infomation .text {
+		position: absolute;
+		width: 100%;
+	}
+	
+	.boss .infomation {
+		margin: 0 auto;
+	}
+	
+	.infomation p {
+		margin:0;
+		margin-bottom: 5px;
+	}
+
+	.infomation .name {
+		font-size: 22px;
+		margin-right: 10px;
+		font-weight: bold;
+	}
+
+	.left {
+		float: left;
+		text-align: right;
+	}
+
+	.right {
+		float: right;
+	}
+
+	/*.left .text {
+		right:0;
+	}*/
+
+	.clear {
+		clear: both;
+	}
+
+	.student {
+		padding:40px 0;
+		height: 300px;
+		box-sizing:content-box;
+		vertical-align: middle;
+		position: relative;
+	}
+
+	.student .head {
+		position: relative;
+	}
+
+	.student .infomation {
+		position: relative;
+		margin-top: 75px;
+	}
+
+	.student .infomation .text p{ 
+		margin:0
+	}
+	
+	.contact-us {
+		min-height: 237px;
+		margin-top:20px;
+	}
+
+	.detail {
+		width: 100%;
+	}
+
+	.con-info {
+		margin-bottom: 10px;
+		text-align: center;
+	}
+
+	.con-info .up {
+		font-size: 25px;
+	}
+
+	.con-info .down {
+		font-size: 25px;
+	}
+
+	.contact-info p {
+		margin:5px;
+	}
+
+	.footer p {
+		text-align: center;
+		background: #2d3e50;
+		padding:30px 0 50px 0;
+		color: #7f8c8d;
+		vertical-align: middle;
+	}
+
+	.footer p a {
+		color:#7f8c8d;
+	}
+	
+	.amz-toolbar {
+		position: fixed;
+		height: 106px;
+		width: 48px;
+		bottom: 20px;
+		right: 20px;
+		z-index: 100;
+	}
+
+	.am-icon-btn {
+		display: block;
+		cursor: pointer;
+	}
+
+	.wechat {
+		position: relative;
+	}
+
+	.wx {
+		position: absolute;
+		left:-85px;
+		top:30px;
+		width: 85px;
+		height: 80px;
+		display: none;
+	}
+	
+	#backup {
+		opacity: 0;
+		transition:0.3s opacity;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<!-- <div class="banner page">
+			<img src="img/contact-banner.jpg" alt="" class="r-img">
+		</div> -->
+		<div class="about-us page">
+			<div class="page-title">
+				<div id="aboutus" data-animate="0" class="i_name">
+					<h1><em>联系</em>我们</h1>
+					<p>CONTACT US</p>
+				</div>
+				<!-- <img src="img/aboutus.jpg" alt="" class="r-img" id="aboutus" data-animate="0"> -->
+			</div>
+			<div class="tech">
+				<div class="am-g">
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-6 t-box">
+						<div class="t-img">
+							<img src="{% static 'img/html5.png' %}" alt="" id="html5">
+						</div>
+					</div>
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-6 t-box">
+						<div class="t-img">
+							<img src="{% static 'img/css3.png' %}" alt="" id="css3">
+						</div>
+					</div>
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-6 t-box">
+						<div class="t-img">
+							<img src="{% static 'img/django.png' %}" alt="" id="django">
+						</div>
+					</div>
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-6 t-box">
+						<div class="t-img">
+							<img src="{% static 'img/apache.png' %}" alt="" id="apache">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="team page">
+			<div class="page-title">
+				<div class="i_name" data-animate="0" id="ourteam">
+					<h1><em>我们</em>的团队</h1>
+					<p>OUR TEAM</p>
+				</div>
+				<!-- <img src="img/ourteam.jpg" alt="" class="r-img" id="ourteam" data-animate="0"> -->  
+			</div>
+			<div class="team-members">
+				<div class="boss mate-box">
+					<div class="head">
+						<div class="h-img">
+							<img src="{% static 'img/boss.png' %}" alt="" id="boss">
+						</div>
+						<h1>指导老师</h1>
+					</div>
+					<div class="infomation">
+						<div class="text" id="bt">
+							<p><span class="name">司占军</span> 教授—硕士生导师—天津科技大学信息化办主任</p>
+							<p>主要从事于   图形图像处理、数字出版技术的研究，开设
+							虚拟现实、三维游戏、在线教育等诸多前沿领域的课题，
+							旨在结合专业特色带领司家帮走向更广阔的数字出版新天地！</p>
+						</div>
+					</div>
+				</div>
+				<div class="mate-box student" id="lu-box">
+					<div class="head left">
+						<div class="h-img">
+							<img src="{% static  'img/lu.png' %}" alt="" id="lu" data-animate="0">
+						</div>
+					</div>
+					<div class="infomation right">
+						<div class="text" id="lt">
+							<p><span class="name">张潞</span> 研究生（数字出版技术专业）</p>
+							<p>明明可以靠脸吃饭，非要靠技术，自诩“技术汉子”</p>
+							<p>擅长于平面设计、三维建模、虚拟现实技术</p>
+							<p>是本网站开发的创意、平面、产品、颜值等一系列担当！</p>
+						</div>
+					</div>
+				</div>
+				<div class="mate-box student" id="ying-box">
+					<div class="head right">
+						<div class="h-img">
+							<img src="{% static 'img/ying.png' %}" alt="" id="ying" data-animate="0">
+						</div>
+					</div>
+					<div class="infomation left">
+						<div class="text" id="yt">
+							<p>研究生（数字出版技术专业） <span class="name">王颖</span></p>
+							<p>可爱、温柔、美丽、善良、大方”自恋得不像实力派！</p>
+	             			<p>是司家帮的第一总管，擅长于归纳总结，财务事物</p>
+	     					<p>是本网站开发的产品内容、文案、广告等一系列担当！</p>
+     					</div>
+					</div>
+				</div>
+				<div class="mate-box student" id="ke-box">
+					<div class="head left">
+						<div class="h-img">
+							<img src="{% static 'img/ke.png' %}" alt="" id="ke" data-animate="0">
+						</div>
+					</div>
+					<div class="infomation right">
+						<div class="text" id="kt">
+							<p><span class="name">沈柯</span> 研究生（数字出版技术专业）</p>
+							<p>自诩科大第一美男子，当之无愧的司家帮颜值担当</p>
+							<p>擅长于Html5 前端开发、Javascript，爱好吃、写代码，标准技术宅男</p>
+							<p>是本网站开发过程中平面、前端开发以及耍帅担当。</p>
+						</div>
+					</div>
+				</div>
+				<div class="mate-box student" id="li-box">
+					<div class="head right">
+						<div class="h-img">
+							<img src="{% static 'img/li.png' %}" alt="" id="li" data-animate="0">
+						</div>
+					</div>
+					<div class="infomation left">
+						<div class="text" id="lit">
+							<p>研究生（数字出版技术专业） <span class="name">李慎亮</span></p>
+							<p>堪称最爱说话的程序员，拥有唐僧般碎碎念的不朽功力！</p>
+	             			<p>擅长于多类编程语言Python、JAVA等，以及数据库MySQL等</p>
+	     					<p>是本网站开发的数据库、网站后台建设以及“陪聊”担当</p>
+     					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="contact-us page">
+			<div class="page-title">
+				<div class="i_name" id="contactus" data-animate="0">
+					<h1><em>联系</em>我们</h1>
+					<p>CONTACT US</p>
+				</div>
+				<!-- <img src="img/contactus.png" alt="" class="r-img" data-animate="0" id="contactus"> -->
+			</div>
+			<div class="am-g detail">
+				<div class="am-u-lg-4 am-u-md-4 am-u-sm-12 con-info">
+					<p class="up"><span class="am-icon-phone"></span> 科大司家帮电话</p>
+					<p class="down">(+86) 183-2269-6345</p>
+				</div>
+				<div class="am-u-lg-4 am-u-md-4 am-u-sm-12 con-info">
+					<p class="up"><span class="am-icon-envelope"></span> 商务合作</p>
+					<p class="down">szj@tust.edu.cn</p>
+				</div>
+				<div class="am-u-lg-4 am-u-md-4 am-u-sm-12 con-info">
+					<p class="up"><span class="am-icon-map-marker"></span> 公司地址</p>
+					<p class="down">天津大沽南路1038号</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="amz-toolbar">
+		<a href="#" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="backup"></a>
+		<div class="am-icon-btn am-icon-wechat" class="wechat" id="wechat">
+			<img src="{% static 'img/wx-code.png' %}" alt="" class="wx">
+		</div>
+	</div>
+	<div class="footer">
+	{% include "parts/footer.html"%}
+	</div>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script>
+	//浏览器滚动100显示返回顶部按钮
+	function showScroll() {
+		$(window).scroll(function() {
+			var topValue = $(window).scrollTop();
+			if(topValue>=100) {
+				$('#backup').css({
+					opacity:1
+				});
+			} else {
+				$('#backup').css({
+					opacity:0
+				});
+			}
+		})
+	}
+	showScroll();
+
+	$(function() {
+		var bodyHeight = $(document.body).height();
+		var clientHeight = $("html")[0].clientHeight;
+		//console.log(clientHeight);
+		//console.log(bodyHeight);
+
+		//about us
+		var n = $('.infomation .text').find('p').length;
+		var $p = $('.infomation .text').find('p')
+		console.log($p[3].clientHeight)
+
+		//学生头像居中
+		$('.student .head').each(function() {
+			var h = $(this).find('img').height();
+			var mt = 150-h/2
+			$(this).css({
+				marginTop:mt
+			})
+		});
+
+		//动态获取div高度把容器撑起来
+		$('.head .h-img').each(function() {
+			var h = $(this).find('img').height();
+			$(this).css({
+				height:h
+			})
+		});
+
+		$('.text').each(function() {
+			var h = $(this).find('p').height();
+			var text_h = 0
+			var $p = $(this).find('p')
+			for(var i=0;i<$(this).find('p').length;i++) {
+				text_h += $p[i].clientHeight
+				console.log(text_h)
+			}
+			$(this).parent('.infomation').css({
+				height:text_h
+			})
+		})
+
+		//二维码鼠标移动显示
+		$('#wechat').hover(function() {
+			$('.wx').fadeIn();
+		},function() {
+			$('.wx').fadeOut();
+		});
+
+		//返回顶部按钮
+		$('#backup').click(function(e) {
+			e.preventDefault();
+			$('html,body').animate({
+				scrollTop:0
+			})
+		})
+
+		$('#aboutus').css({
+			opacity:0
+		});
+
+		$('#html5,#css3,#django,#apache').css({
+			width:'50%',
+			opacity:0,
+			top:50,
+			left:50
+		});
+
+		//our team
+		$('#ourteam').css({
+			opacity:0
+		});
+
+		$('#boss').css({
+			width:'50%',
+			opacity:0,
+			top:50,
+			left:50
+		});
+
+		$('#lu,#ke').css({
+			opacity:0,
+			left:-300
+		});
+
+		$('#ying,#li').css({
+			opacity:0,
+			left:300
+		});
+
+		$('#bt').css({opacity:0,bottom:-100});
+		$('#lt,#kt').css({opacity:0,left:300});
+		$('#yt,#lit').css({opacity:0,right:300});
+
+
+		//contactus
+		$('#contactus').css({
+			opacity:0
+		})
+
+	});
+
+	//鼠标经过动画
+	var hoverAnimate = function(id,over_h,out_h) {
+
+	    var _options = {
+	        overDuration : 200,
+	        outDuration : 100,
+	        over : {
+	            width : '100%',
+	            top : -15,
+	            left:0,
+	            opacity : 1
+	        },
+	        out : {
+	            width : '100%',
+	            top : 0,
+	            left:0,
+	            opacity : 1
+	        }
+	    };
+
+	    $(id).stop().animate(_options.over, _options.overDuration, '', function() {
+	        $(id).stop().animate(_options.out, _options.outDuration);
+	    });
+
+	    $(id).on('mouseenter', function() {
+	        $(this).filter(':not(:animated)').stop().animate(_options.over, _options.overDuration);
+	    });
+
+	    $(id).on('mouseleave', function() {
+	        $(this).filter(':not(:animated)').stop().animate(_options.out, _options.outDuration);
+	    });
+	};
+
+	//boss头像
+	var headHoverAnimate = function(id) {
+
+		var _options = {
+			overDuration:300,
+			outDuration:100,
+			over:{
+				width:'100%',
+				top:0,
+				left:0,
+				opacity:1,
+				rotate3Di:'360deg'
+			},
+			out:{
+				width:'100%',
+				top:0,
+				left:0,
+				opacity:1,
+				rotate3Di:'0'
+				
+			},
+			// hover:{	
+			// 	rotate3Di:'360deg'
+			// }
+		}
+
+		$(id).stop().animate(_options.over,_options.overDuration,'',function() {
+			$(id).stop().animate(_options.out,_options.outDuration);
+		});
+
+		// $(id).on('mouseenter', function() {
+	 //        $(this).filter(':not(:animated)').stop().animate(_options.hover, _options.overDuration);
+	 //    });
+
+	 //    $(id).on('mouseleave', function() {
+	 //        $(this).filter(':not(:animated)').stop().animate(_options.out, _options.outDuration);
+	 //    });
+	}
+
+	//学生头像
+	var stuAnimate = function(id) {
+		var _options = {
+			overDuration:500,
+			move:{
+				opacity:1,
+				top:0,
+				left:0
+			}
+		}
+		$(id).stop().animate(_options.move,_options.overDuration);
+	}
+
+
+	//滚动动画
+	var scrollSet = function() {
+		var windowScrollTop = $(window).scrollTop();
+    	var screenHeight = $(window).height();
+
+    	var banner_h = $('.banner').height();
+    	var about_h = $('.about-us').height();
+    	//console.log(banner_h+'--'+about_h);
+    	//console.log('boss的位置'+$('#boss').offset().top)
+		//console.log('ke的位置'+$('#ke').offset().top)
+
+    	var boss_h = $('.boss').height();
+    	var lu_h = $('#lu-box').height();
+    	var ying_h = $('#ying-box').height();
+    	var ke_h = $('#ke-box').height();
+    	var li_h = $('#li-box').height();
+
+    	//console.log(banner_h+about_h)
+
+    	//about us
+    	if($('#aboutus').data('animate')=="0") {
+    		$('#aboutus').animate({
+    			opacity:1
+    		},1000).data('animate','1');
+
+    		hoverAnimate('#html5');
+
+    		setTimeout(function() {
+	    		hoverAnimate('#css3');
+	    	},200);
+
+	    	setTimeout(function() {
+	    		hoverAnimate('#django');
+	    	},400);
+
+	    	setTimeout(function() {
+	    		hoverAnimate('#apache');
+	    	},600);
+    	}
+
+    	//our team
+    	//boss
+    	if(windowScrollTop > (about_h) && $('#ourteam').data('animate')=="0") {
+    		$('#ourteam').animate({
+    			opacity:1
+    		},1000).data('animate','1');
+			headHoverAnimate('#boss');
+			var boss = document.getElementById('boss');
+
+			$('#bt').animate({opacity:1,bottom:0},300)
+    	}
+    	//lu
+    	if(windowScrollTop > (about_h+boss_h) && $('#lu').data('animate')=="0") {
+    		stuAnimate('#lu');
+    		$('#lt').animate({opacity:1,left:0},300);
+    		$('#lu').data('animate','1');
+    	} 
+    	//ying
+    	if(windowScrollTop > (about_h+boss_h+lu_h) && $('#ying').data('animate')=="0") {
+    		stuAnimate('#ying');
+    		$('#yt').animate({opacity:1,right:0},300);
+    		$('#ying').data('animate','1');
+    	}
+    	//ke
+    	if(windowScrollTop > (about_h+boss_h+lu_h+ying_h+ke_h) && $('#ke').data('animate')=="0") {
+    		stuAnimate('#ke');
+    		$('#kt').animate({opacity:1,left:0},300);
+    		$('#ke').data('animate','1');
+    	}
+    	//li
+    	if(windowScrollTop > (about_h+boss_h+lu_h+ying_h+ke_h+li_h) && $('#li').data('animate')=="0") {
+    		stuAnimate('#li');
+    		$('#lit').animate({opacity:1,right:0},300);
+    		$('#li').data('animate','1');
+    	}
+
+    	//contact us 
+    	if(windowScrollTop > (about_h+boss_h+lu_h+ying_h+ke_h+li_h) && $('#contactus').data('animate')=="0") {
+    		$('#contactus').animate({
+    			opacity:1
+    		},1000).data('animate','1')
+    	}
+
+    	
+	}
+
+	setTimeout(function() {
+	    scrollSet();
+	    $(window).scroll(scrollSet);
+	}, 200);
+	</script>
+</body>
+</html>

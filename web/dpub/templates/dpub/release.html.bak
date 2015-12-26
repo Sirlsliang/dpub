@@ -1,0 +1,120 @@
+{% extends "base.html"%}
+{% load staticfiles  %}
+{% block title%}发布需求{% endblock %}
+{% block navigator%} {% include "parts/navigator.html"%}{% endblock %}
+{% block content %}
+<div class="r-title">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12" style="position:relative;">
+				<img src="{% static 'img/big-logo.png' %}" alt="" class="r-logo">
+				<div class="r-text">
+					<h1>发布需求</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form action="{% url 'articleAdd'%}" id="releaseForm" method="POST" class="am-form" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="r1 r-page">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 r-wrapp">
+				<div class="r-box">
+					<div class="am-form-group">
+					
+						<label for="chooseInput">选择需求类别</label>
+						<select name="servicemodel">
+							{% for serviceModel in allServiceModel%}
+							<option value="{{ serviceModel.id}}">
+									{{ serviceModel.modelName}}
+							</option>
+							{% endfor %}
+						</select>
+						<select name="classmodel">
+							{% for serviceModel in allServiceModel%}
+								{% for model in serviceModel.classModel.all %}
+									<option value="{{ model.id}}">
+										{{ model.className}}
+									</option>
+								{% endfor %}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+			</div>
+	</div>
+	<div class="r2 r-page">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 r-wrapp">
+				<div class="r-box">
+					<div class="am-form-group">
+						<label for="desInput">简单描述</label>
+						<input type="text" name="title" placeholder="请简单描述一下需求" id="desInput">
+					</div>
+					<div class="am-form-group">
+						<label for="desTextarea">制作要求</label>
+						<textarea placeholder="制作要求" name="content" id="desTextarea"></textarea>
+						<div class="am-form-group am-form-file des-input">
+  						<button type="button" class="am-btn am-btn-primary am-btn-sm">
+    							<i class="am-icon-cloud-upload"></i> 选择要上传的文件
+    						</button>
+							<input type="file" id="des-file-input" multiple name="img">
+						</div>
+						<div id="file-list"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="r3 r-page">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 r-wrapp">
+				<div class="r-box">
+					<h1>联系方式</h1>
+					<div class="am-form-group">
+						<label for="nameInput">姓名</label>
+						<input type="text" placeholder="你叫什么名字？" id="nameInput" name="usernickname">
+					</div>
+					<div class="am-form-group">
+						<label for="telInput">电话</label>
+						<input type="text" placeholder="电话是多少？" id="telInput" name="phonenum">
+					</div>
+					<div class="am-form-group">
+						<label for="comInput">单位</label>
+						<input type="text" name="companyname" placeholder="你是哪个单位的？" id="comInput" name="company">
+					</div>
+
+					<div class="am-form-group">
+						<label for="emailInput">邮箱</label>
+						<input type="text" placeholder="邮箱说一下" id="emailInput" name="email">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="r4 r-page">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 r-wrapp">
+				<div class="r-box">
+					<div class="am-form-group">
+						<label for="timeInput">完成时间</label>
+						<input type="text" placeholder="完成时间" id="timeInput" name="endDate" data-am-datepicker required>
+					</div>
+					<div class="am-form-group">
+						<label for="priceTextarea">设置价格</label>
+						<input type="text" placeholder="价格" id="priceInput" name="price">
+						<label>元</label>
+					</div>
+					<div class="am-form-group" id="release">
+						<button type="submit" id="submit-btn" class="button-3d button-primary"><span class="am-icon-rocket"></span> 发布</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+	<script src="{% static 'js/index/index.js' %}"></script
+	{% endblock %}
+	{% block footer%}
+		{% include "parts/footer.html"%}
+	{% endblock %}

@@ -1,76 +1,19 @@
 {% extends "base.html"%}
 {% load staticfiles %}
-{% block title %}服务商库{% endblock%}
+{% block title %}服务商信息库{% endblock%}
 {% block navigator %}{% include "parts/navigator.html" %}{% endblock %}
 {% block content %}
 <div class="s-title">
 	<div class="am-g am-container">
 		<div class="am-u-lg-12" style="position:relative;">
-			<h1 class="server-title">服务商库</h1>
+			<h1 class="server-title">服务商信息库</h1>
 		</div>
 	</div>
 </div>
-<div class="servers outer">
-	<div class="am-g am-container">
-		<div class="am-u-lg-12">
-			<ol class="am-breadcrumb">
-				<li><a href="#" class="am-icon-institution"> 服务商库</a></li>
-				<li class="am-active">所有分类</li>
-			</ol>
-		</div>
-	</div>
-	<div class="am-g am-container">
-		<div class="am-u-lg-12 content-wrapper">
-			<div class="content-box">
-				<ul class="cat-list">
-					<li>类目：</li>
-					<li>全部</li>
-					<li>平面设计
-						<ul class="sub-list">
-							<li>书籍排版</li>
-							<li>封面设计</li>
-							<li>扉页设计</li>
-							<li>电子书制作</li>
-						</ul>
-					</li>
-					<li>网站建设
-						<ul class="sub-list">
-							<li>网站UI设计</li>
-							<li>前端开发</li>
-							<li>后台搭建</li>
-							<li>模板开发</li>
-						</ul>
-					</li>
-					<li>移动应用开发
-						<ul class="sub-list">
-							<li>应用UI设计</li>
-							<li>APP开发</li>
-							<li>微信应用开发</li>
-						</ul>
-					</li>
-					<li>影视影音
-						<ul class="sub-list">
-							<li>文案设计</li>
-							<li>影音录制</li>
-							<li>影音制作</li>
-						</ul>
-					</li>
-					<li>动漫游戏
-						<ul class="sub-list">
-							<li>二维设计</li>
-							<li>三维设计</li>
-							<li>游戏设计</li>
-							<li>脚本制作</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+
 	<div class="am-g am-container">
 		{% include 'ajax/servers.html'%}		
 	</div>
-</div>
 {% endblock %}
 {% block footer %}
 {% include 'parts/footer.html'%}

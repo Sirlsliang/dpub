@@ -1,6 +1,108 @@
-<ul>
-{% for article in articles %}
-<li> {{article.title}}</li>
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title%}需求信息库{% endblock %}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock %}
+{% block content %}	
+<div class="s-title">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12" style="position:relative;">
+			<h1 class="server-title">需求信息库</h1>
+		</div>
+	</div>
+</div>
+<div class="demand outer">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12">
+			<ol class="am-breadcrumb">
+				<li><a href="/index.html" class="am-icon-home"> 首页</a></li>
+				{% if serviceModel%}
+				<li class="am-active"><a href="/get/servicemodel/{{serviceModel.id}}/">{{ serviceModel.modelName}}</a></li>
+				{% endif %}
+				{% if classModel%}
+				<li class="am-active">
+					<a href ="/get/servicemodel/{{serviceModel.id}}/classModel/{{classModel.id}}/">
+						{{ classModel.className }}
+					</a>
+				</li>
+				{% endif %}
+			</ol>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="content-box demand">
+				<ul class="cat-list">
+					{% for model in serviceModel.classModel.all %}
+					<span class="am-dropdown" data-am-dropdown>
+						<span class="am-btn am-btn-primary {% if model.id == classModel.id %}btn-active{% endif %}">
+							<a href="/get/servicemodel/{{ serviceModel.id}}/classmodel/{{model.id}}/">
+								{{ model.className }}
+							</a>
+						</span>
+					</span>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="content-box">
+				<div class="box-tabs">
+					<ul class="box-tabs-nav demand-tabs-nav">
+						<li class="active"><a href="#tab1">进行中</a></li>
+						<li class=""><a href="#tab2">已结束</a></li>
+					</ul>
+					<div class="server-tabs-bd">
+						<script>
+function getArticles(pageId){
+	url ='/get/articles/'+{{serviceModel.id}}+'/'+pageId+'/';
+	{% if classModel %}
+	url ='/get/articles/'+{{serviceModel.id}}+'/'+{{classModel.id}}+'/'+pageId+'/';
+	{% endif %}
+	$.get(
+			url,
+			function (data){
+				$("#tab1").html(data);
+			}
+		 )	
 
+}
+$(function(){
+	getArticles(1);	
+})
+						</script>
+						<div class="server-tab-panel active" id="tab1">
+						</div>
+						<script>
+function getOutArticles(pageId){
+	url ='/get/outarticles/'+{{serviceModel.id}}+'/'+pageId+'/';
+	{% if classModel%}
+	url ='/get/outarticles/'+{{serviceModel.id}}+'/'+{{classModel.id}}+'/'+pageId+'/';
+	{% endif %}
 
-{% endfor %}
+	$.get(
+			url,
+			function (data){
+				$("#tab2").html(data);
+			}
+		 )	
+
+}
+$(function(){
+	getOutArticles(1);	
+})
+						</script>
+						<div class="server-tab-panel" id="tab2">	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block footer%}
+{% include "parts/footer.html"%}
+{% endblock %}
+

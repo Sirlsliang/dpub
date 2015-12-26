@@ -1,120 +1,136 @@
 {% extends "base.html"%}
-{% load staticfiles  %}
-{% block title%}发布需求{% endblock %}
-{% block navigator%} {% include "parts/navigator.html"%}{% endblock %}
+{% load staticfiles %}
+{% block title %} 发布需求{% endblock %}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock%}
 {% block content %}
-<div class="r-title">
+	<div class="s-title">
 		<div class="am-g am-container">
 			<div class="am-u-lg-12" style="position:relative;">
-				<img src="{% static 'img/big-logo.png' %}" alt="" class="r-logo">
-				<div class="r-text">
-					<h1>发布需求</h1>
-				</div>
+				<h1 class="server-title">需求发布</h1>
 			</div>
 		</div>
 	</div>
-	<form action="{% url 'articleAdd'%}" id="releaseForm" method="POST" class="am-form" enctype="multipart/form-data">
-	{% csrf_token %}
-	<div class="r1 r-page">
+	<div class="outer user">
+		<form action="{% url 'articleAdd'%}" method="POST" id="releaseForm" class="am-form" enctype="multipart/form-data">
+			{% csrf_token %}
 		<div class="am-g am-container">
-			<div class="am-u-lg-12 r-wrapp">
-				<div class="r-box">
-					<div class="am-form-group">
-					
-						<label for="chooseInput">选择需求类别</label>
-						<select name="servicemodel">
-							{% for serviceModel in allServiceModel%}
-							<option value="{{ serviceModel.id}}">
-									{{ serviceModel.modelName}}
-							</option>
-							{% endfor %}
-						</select>
-						<select name="classmodel">
-							{% for serviceModel in allServiceModel%}
-								{% for model in serviceModel.classModel.all %}
-									<option value="{{ model.id}}">
-										{{ model.className}}
-									</option>
-								{% endfor %}
-							{% endfor %}
-						</select>
-					</div>
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title orange">
+					需求详情
 				</div>
-			</div>
-			</div>
-	</div>
-	<div class="r2 r-page">
-		<div class="am-g am-container">
-			<div class="am-u-lg-12 r-wrapp">
-				<div class="r-box">
-					<div class="am-form-group">
-						<label for="desInput">简单描述</label>
-						<input type="text" name="title" placeholder="请简单描述一下需求" id="desInput">
-					</div>
-					<div class="am-form-group">
-						<label for="desTextarea">制作要求</label>
-						<textarea placeholder="制作要求" name="content" id="desTextarea"></textarea>
-						<div class="am-form-group am-form-file des-input">
-  						<button type="button" class="am-btn am-btn-primary am-btn-sm">
-    							<i class="am-icon-cloud-upload"></i> 选择要上传的文件
-    						</button>
-							<input type="file" id="des-file-input" multiple name="img">
+				<div class="content-box">
+					<div class="release-info">
+						<div class="am-form-group">
+							<label for="sim-describe">简单描述</label>
+							<input name="title" type="text" id="sim-describe" placeholder="" class="input">
 						</div>
-						<div id="file-list"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="r3 r-page">
-		<div class="am-g am-container">
-			<div class="am-u-lg-12 r-wrapp">
-				<div class="r-box">
-					<h1>联系方式</h1>
-					<div class="am-form-group">
-						<label for="nameInput">姓名</label>
-						<input type="text" placeholder="你叫什么名字？" id="nameInput" name="usernickname">
-					</div>
-					<div class="am-form-group">
-						<label for="telInput">电话</label>
-						<input type="text" placeholder="电话是多少？" id="telInput" name="phonenum">
-					</div>
-					<div class="am-form-group">
-						<label for="comInput">单位</label>
-						<input type="text" name="companyname" placeholder="你是哪个单位的？" id="comInput" name="company">
-					</div>
+						<div class="am-form-group">
+							<label for="timeInput">需求分类</label>
+							<input name="boolWorks" type="radio" value="0" checked id="xq"><label>需求</label>
+							<input name="boolWorks" type="radio" value="1" id="work"><label>作品</label>
+						</div>
+						<script>
+							$('#xq').change(function(){
+								if($(this).is(':checked')){
+									$('#timeAndPrice').show();
+								}
+							})
+							
+							$('#work').change(function(){
+								if($(this).is(':checked')){
+									$('#timeAndPrice').hide()
+								}
+							})					 
+							
+							
+							function getTheClassModel(){
+								id =$("#category-selected").val()
+								selBox = $("#classSelect")
+								$.get(
+									'/get/classmodel/'+id+'/',
+									function (data){
+										selBox.html(data);
+									}
+								);
 
-					<div class="am-form-group">
-						<label for="emailInput">邮箱</label>
-						<input type="text" placeholder="邮箱说一下" id="emailInput" name="email">
+							
+							}
+							$(function(){
+								getTheClassModel()
+							});
+						</script>
+						<div class="am-form-group">
+							<label for="username">选择类别</label>
+								<select data-am-selected name="servicemodel" placeholder="选择类别" id="category-selected" onchange="getTheClassModel()">
+									{% for serviceModel in allServiceModel%}
+										<option label="{{serviceModel.modelName}}" value="{{serviceModel.id}}">
+											{{serviceModel.modelName}}
+										</option>
+									{% endfor %}
+								</select>
+							<select name="classmodel"  data-am-selected placeholder="详细类别" class="sub-category" id="classSelect">
+							</select>
+						</div>
+						<div class="am-form-group">
+							<label for="desTextarea">制作要求</label>
+							<textarea name="content" laceholder="制作要求" id="desTextarea"></textarea>
+						</div>
+						<div class="am-form-group am-form-file des-input">
+	  						<button type="button" class="am-btn am-btn-primary am-btn-sm">
+	    						<i class="am-icon-cloud-upload"></i> 选择要上传的文件
+	    					</button>
+	  						<input type="file" name="img" id="des-file-input" multiple>
+	  						<div id="file-list"></div>
+						</div>
+						<div id="timeAndPrice" >
+							<div class="am-form-group">
+								<label for="timeInput">完成时间</label>
+								<input name="endDate" type="text" placeholder="完成时间" id="timeInput" class="input" data-am-datepicker >
+							</div>
+							<div class="am-form-group">
+								<label for="priceInput">设置价格</label>
+								<input name="price" type="text" id="priceInput" placeholder="" class="input" pattern="^\d+$">
+								<label>元</label>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="r4 r-page">
 		<div class="am-g am-container">
-			<div class="am-u-lg-12 r-wrapp">
-				<div class="r-box">
-					<div class="am-form-group">
-						<label for="timeInput">完成时间</label>
-						<input type="text" placeholder="完成时间" id="timeInput" name="endDate" data-am-datepicker required>
-					</div>
-					<div class="am-form-group">
-						<label for="priceTextarea">设置价格</label>
-						<input type="text" placeholder="价格" id="priceInput" name="price">
-						<label>元</label>
-					</div>
-					<div class="am-form-group" id="release">
-						<button type="submit" id="submit-btn" class="button-3d button-primary"><span class="am-icon-rocket"></span> 发布</button>
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					联系方式
+				</div>
+				<div class="content-box">
+					<div class="release-info">
+						<div class="am-form-group">
+							<label for="comInput">单位名称</label>
+							<input type="text" name="companyname" id="comInput" placeholder="" class="input">
+						</div>
+						<div class="am-form-group">
+							<label for="nameInput">姓名</label>
+							<input name="usernickname" type="text" id="nameInput" placeholder="" class="input">
+						</div>
+						<div class="am-form-group">
+							<label for="telInput">电话</label>
+							<input name="phonenum" type="text" id="telInput" placeholder="" class="input">
+						</div>
+						<div class="am-form-group">
+							<label for="emailInput">电子邮件</label>
+							<input type="text" name="email" id="emailInput" placeholder="" class="input">
+						</div>
+						<div class="am-form-group" id="release">
+							<button type="submit" id="submit-btn" class="button-3d button-primary"><span class="am-icon-rocket"></span> 发布</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
-	</form>
-	<script src="{% static 'js/index/index.js' %}"></script
-	{% endblock %}
-	{% block footer%}
+	{%  endblock %}
+	{% block footer %}
 		{% include "parts/footer.html"%}
 	{% endblock %}
+	

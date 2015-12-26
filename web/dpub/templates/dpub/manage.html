@@ -71,10 +71,14 @@
 					发布管理
 				</div>	
 				<script>
-					function getTheArticle(page){
-						$.get("/manage/article/"+page+"/",
+					function getTheArticle(boolWorks,page){
+						$.get("/manage/article/"+boolWorks+"/"+page+"/",
 							function(data){
-								$("#contentBox").html(data);
+								if (boolWorks == 0 ){
+									$("#contentBox").html(data);
+								}else{
+									$("#workBox").html(data);
+								}
 							}
 						);
 					}
@@ -90,7 +94,8 @@
 						}
 					}
 					$(function(){
-						getTheArticle(1);
+						getTheArticle(0,1);
+						getTheArticle(1,1);
 					});
 				</script>
 
@@ -100,10 +105,11 @@
 		</div>
 		<div class="am-g am-container">
 			<div class="am-u-lg-12 content-wrapper">
-				<div class="content-title">
-					我收藏的需求
+				<div class="content-title" >
+					我的作品
 				</div>
-				<div class="content-box">
+
+				<div class="content-box" id="workBox">
 				</div>
 			</div>
 		</div>

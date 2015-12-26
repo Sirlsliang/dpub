@@ -1,0 +1,48 @@
+{%  if outArticles %}
+<table class="am-table am-table-bordered am-table-radius am-table-hover list-task">
+	<thead>
+		<tr style="color:#0e90d2"> 
+			<td>价格</td>
+			<td>信息</td>
+			<td>结束时间</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for outArticle in outArticles %}
+		<tr>
+			<td>
+				<p>
+				<em class="list-task-reward">￥{{outArticle.price}}</em>	
+				</p>
+			</td>
+			<td>
+				<p>
+				<a href="/get/article/{{ outArticle.id}}/" class="list-task-title" title="{{outArticle.title}}">{{outArticle.title}}</a>
+				</p>
+				<p class="list-task-ctn">{{outArticle.content|slice:"10"}}</p>
+			</td>
+			<td>
+				<span>{{outArticle.endDate|date:"Y-m-d"}}</span>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<ul class="am-pagination am-pagination-centered">
+	{% if outArticles.has_previous %}
+		<li><a href="javascript:void(0);" onclick="getOutArticles({{outArticles.previous_page_number}})">&laquo; 上一页</a></li>
+	{% else %}
+		<li class="am-disabled"><a href="javascript:void(0);">&laquo; 上一页</a></li>
+	{% endif %}
+	{%if OutArticles.has_next %}
+		<li ><a href="javascript:void(0);" onclick="getOutArticles({{outArticles.next_page_number}})">下一页 &raquo;</a></li>
+	{% else %}
+		<li class="am-disabled"><a href="javascript:void(0);">下一页 &raquo;</a></li>
+	{% endif %}
+</ul>
+{% else%}
+<center>
+
+<h1>对不起,没有相关数据</h1>
+</center>
+{% endif %}

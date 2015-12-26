@@ -1,0 +1,151 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title%}具体需求{% endblock%}
+{% block navigator%} {% include "parts/navigator.html"%}{% endblock%}
+{% block content %}
+	<div class="s-title">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12" style="position:relative;">
+				<h1 class="server-title">具体需求</h1>
+			</div>
+		</div>
+	</div>
+	<div class="demand outer">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12">
+				<ol class="am-breadcrumb">
+					<li><a href="/index.html" class="am-icon-home"> 首页</a></li>
+					<li>
+						<a href="/get/servicemodel/{{article.servicemodel.id}}/">
+							{{article.servicemodel.modelName }}
+						</a>
+					</li>
+					<li class="am-active">
+						<a href="/get/servicemodel/{{article.servicemodel.id}}/classmodel/{{article.classmodel.id}}/">
+							{{article.classmodel.className }}
+						</a>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-box">
+					<div class="demand-info">
+						<div class="tc">
+							<h1 class="demand-title">
+								<strong class="demand-price">{{article.price}}元</strong>
+								{{article.title}}
+							</h1>
+							<h3 class="close-date">截止日期：{{article.endDate|date:"Y-m-d"}}</h3>
+						</div>
+						<div class="contact-infomation">
+							<p>联系方式</p>
+							<p>公司名称：{{article.companyname}}</p>
+							<p>姓名：{{article.usernickname}}</p>
+							<p>电话：
+							{% if request.user.is_authenticated %}
+								{{article.phonenum}}
+							{% else  %}
+
+								<a href="{% url 'userLogin'%}">
+									登录后查看
+								</a>
+							{% endif %}
+							</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					详细需求
+				</div>
+				<div class="content-box">
+					<div class="demand-info">
+						<ol class="detail-demand">
+							{{article.content}}
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					<span class="am-icon-comments"></span> 留言板(<span class="number"></span>)
+
+				</div>
+				<div class="content-box">
+					<ul class="am-comments-list am-comments-list-flip">
+						<li class="am-comment">
+							<a href="#link-to-user-home">
+								<img src="img/user-head.png" alt="" class="am-comment-avatar" width="48" height="48">
+							</a>
+							<div class="am-comment-main">
+								<div class="am-comment-hd">
+									<div class="am-comment-meta">
+										<a href="#" class="am-comment-author">某人</a>
+										评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
+									</div>
+								</div>
+								<div class="am-comment-bd">
+									数字资源网真的好牛逼啊，大家都过来支持啊！
+								</div>
+								<div class="am-comment-footer">
+									<div class="am-comment-actions">
+										<a href="#">
+											<i class="am-icon-thumbs-up"></i>
+										</a>
+										<a href="#">
+											<i class="am-icon-thumbs-down"></i>
+										</a>
+										<a href="#">
+											<i class="am-icon-reply"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="am-comment">
+							<a href="#link-to-user-home">
+								<img src="img/user-head-female.jpg" alt="" class="am-comment-avatar" width="48" height="48">
+							</a>
+							<div class="am-comment-main">
+								<div class="am-comment-hd">
+									<div class="am-comment-meta">
+										<a href="#" class="am-comment-author">某人</a>
+										评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
+									</div>
+								</div>
+								<div class="am-comment-bd">
+									<p>真的很不错，尤其是那个前端技术人员，长得太帅啦！</p>
+									<blockquote>对对对！+1</blockquote>
+								</div>
+								<div class="am-comment-footer">
+									<div class="am-comment-actions">
+										<a href="#">
+											<i class="am-icon-thumbs-up"></i>
+										</a>
+										<a href="#">
+											<i class="am-icon-thumbs-down"></i>
+										</a>
+										<a href="#">
+											<i class="am-icon-reply"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	{% block footer%}
+		{% include "parts/footer.html"%}
+	{% endblock %}

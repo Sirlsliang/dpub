@@ -1,0 +1,225 @@
+{% extends "base.html"%}
+{% load staticfiles%}
+{% block title %} {{server.servername}}{% endblock%}
+{% block navigator%}{% include "parts/navigator.html"%}{% endblock%}
+{% block content %}
+<div class="school-title">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12" style="position:relative;">
+			<div class="logo">
+				<img src="/upload/{{ server.serverlogo}}" alt="">
+			</div>
+			<h1 class="school-name">{{ server.servername }}</h1>
+		</div>
+	</div>
+</div>
+<div class="school-banner">
+	<div class="am-g banner-container">
+		<div class="am-u-lg-12">
+			<img src="/upload/{{server.serverbanner}}" alt="">
+		</div>
+	</div>
+</div>
+<div class="info-box">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="school-intro">
+				<h3 class="caption">服务商简介：</h3>
+				<p class="intro">{{ server.serverdesc}}</p>
+			</div>
+			<div class="school-intro courses">
+				<h3 class="caption">
+					{% if server.serverclass == "0"%}
+						主要作品：
+					{% elif server.serverclass == "1" %}
+						主要业务:
+					{% else %}
+						主要课程:
+					{% endif %}
+				</h3>
+				<p class="intro">
+				{% for lesson in lessons %}
+				<span>{{ lesson.lessonname}}、</span>
+				{% endfor %}
+				</p>
+			</div>
+			<div class="school-intro contact-us">
+				<h3 class="caption">联系我们：</h3>
+				<p>姓名：{{ server.servername}}</p>
+				<p>电话：{{ server.servertel}}</p>
+				<p>地址：{{ server.serveraddress}}</p>
+			</div>
+			<div class="clear"></div>
+			<div class="service-slide">
+				<div class="am-slider am-slider-default am-slider-carousel" data-am-flexslider="{itemWidth: 275, itemMargin: 5, slideshow: false}">
+					<ul class="am-slides">
+						<li>
+							<div class="service-item">
+								<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+								<p class="item-title">书籍排版</p>
+								<p class="item-price">价格：100元</p>
+							</div>
+						</li>
+						<li>
+							<div class="service-item">
+								<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+								<p class="item-title">三维设计</p>
+								<p class="item-price">价格：100元</p>
+							</div>
+						</li>
+						<li>
+							<div class="service-item">
+								<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+								<p class="item-title">APP制作</p>
+								<p class="item-price">价格：100元</p>
+							</div>
+						</li>
+						<li>
+							<div class="service-item">
+								<img src="{% static 'img/item1.jpg'%}" alt="" class="item-img">asdfaseasdf
+								<p class="item-title">封面设计</p>
+								<p class="item-price">价格：100元</p>
+							</div>
+						</li>
+						<li>
+							<div class="service-item">
+								<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+								<p class="item-title">广告设计</p>
+								<p class="item-price">价格：100元</p>
+							</div>
+						</li>
+						<li>
+							<div class="service-item">
+								<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+								<p class="item-title">书籍排版</p>
+								<p class="item-price">价格：100元</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="am-g">
+				<ul class="am-avg-lg-5 am-avg-md-3 am-avg-sm-2 am-thumbnails">
+					<li class="item-box"><img src="{% static 'img/pmsj.jpg' %}" alt="" class="am-thumbnail"></li>
+					<li class="item-box">
+						<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+						<p class="item-title">书籍排版</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item1.jpg' %}" alt="" class="item-img">
+						<p class="item-title">名片制作</p>
+						<p class="item-price">价格：50元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item7.jpg' %}" alt="" class="item-img">
+						<p class="item-title">电子书制作</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item8.jpg' %}" alt="" class="item-img">
+						<p class="item-title">封面设计</p>
+						<p class="item-price">价格：50元</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="am-g">
+				<ul class="am-avg-lg-5 am-avg-md-3 am-avg-sm-2 am-thumbnails">
+					<li class="item-box"><img src="{% static 'img/web.jpg' %}" alt="" class="am-thumbnail"></li>
+					<li class="item-box">
+						<img src="{% static 'img/item9.jpg' %}" alt="" class="item-img">
+						<p class="item-title">网页设计</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item10.jpg' %}" alt="" class="item-img">
+						<p class="item-title">前端开发</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item11.jpg' %}" alt="" class="item-img">
+						<p class="item-title">后台搭建</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item12.jpg' %}" alt="" class="item-img">
+						<p class="item-title">APP开发</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="am-g">
+				<ul class="am-avg-lg-5 am-avg-md-3 am-avg-sm-2 am-thumbnails">
+					<li class="item-box"><img src="{% static 'img/web.jpg' %}" alt="" class="am-thumbnail"></li>
+					<li class="item-box">
+						<img src="{% static 'img/item9.jpg' %}" alt="" class="item-img">
+						<p class="item-title">网页设计</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item10.jpg' %}" alt="" class="item-img">
+						<p class="item-title">前端开发</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item11.jpg' %}" alt="" class="item-img">
+						<p class="item-title">后台搭建</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item12.jpg' %}" alt="" class="item-img">
+						<p class="item-title">APP开发</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="am-g am-container">
+		<div class="am-u-lg-12 content-wrapper">
+			<div class="am-g">
+				<ul class="am-avg-lg-5 am-avg-md-3 am-avg-sm-2 am-thumbnails">
+					<li class="item-box"><img src="{% static 'img/media.jpg' %}" alt="" class="am-thumbnail"></li>
+					<li class="item-box">
+						<img src="{% static 'img/item13.jpg' %}" alt="" class="item-img">
+						<p class="item-title">影视文案设计</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item14.jpg' %}" alt="" class="item-img">
+						<p class="item-title">影视拍摄</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item15.jpg' %}" alt="" class="item-img">
+						<p class="item-title">音频处理</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+					<li class="item-box">
+						<img src="{% static 'img/item16.jpg' %}" alt="" class="item-img">
+						<p class="item-title">后期编辑</p>
+						<p class="item-price">价格：100元</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block footer%}
+{% include "parts/footer.html"%}
+{% endblock %}
+

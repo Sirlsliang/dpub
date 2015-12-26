@@ -7,18 +7,22 @@ from .models import *
 # Register your models here.
 
 # show school information
-class CourseInline(admin.StackedInline):
-    model = Course
+
+class LessonInline(admin.StackedInline):
+    model = Lesson
     extra = 3
-class SchoolAdmin(admin.ModelAdmin):
+
+class ServersAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('学校名称',{'fields':['schName']}),
-        ('学校信息',{'fields':['schDesc','schUrl','schLogo']})
+            ('服务商',{'fields':['servername','serverdesc','serverurl']}),
+            ('详细信息',{'fields':['serverlogo','serverbanner','serverclass','servertel','serveraddress']})
     ]
-    inlines = [CourseInline]
-    list_display = ('schName',)
-    search_fields = ['schName']
-admin.site.register(School,SchoolAdmin)
+    inlines = [LessonInline]
+    list_display = ('servername',)
+    search_fields = ['servername']
+admin.site.register(Servers,ServersAdmin)
+
+
 
 #show service model
 class ClassInline(admin.StackedInline):
@@ -43,6 +47,8 @@ class UserAdmin(UserAdmin):
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title','user','insertDate','endDate')
+    search_fields = ['boolWorks']
+
 
 admin.site.unregister(User)
 admin.site.register(User,UserAdmin)

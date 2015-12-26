@@ -3,107 +3,126 @@
 {% block title%}首页{% endblock %}
 {% block navigator %}{% include "parts/navigator.html"%}{% endblock %}
 {% block content %}
-	<div class="banner">
-		<div class="am-g">
-			<div class="am-u-lg-12">
-				<h1 class="get-title">R-Star 数字资源加工平台</h1>
-				<p>期待你的参与，咱们的平台就是这么牛逼！</p>
+<div class="banner">
+	<div class="am-g-collapse">
+		<div class="am-u-lg-12">
+			<div class="am-slider am-slider-default" data-am-flexslider id="banner-slider">
+				<ul class="am-slides">
+					<li><img src="{% static 'img/banner/banner.png' %}" alt=""></li>
+					<li><img src="{% static 'img/banner/banner2.png' %}" alt=""></li>
+					<li><img src="{% static 'img/banner/banner5.jpg' %}" alt=""></li>
+				</ul>
 			</div>
 		</div>
 	</div>
-	<div class="detail">
-		<div class="am-g am-container" id="detail">
-			{% for serviceModel in allServiceModel %}
-			<div class="detail-box">
-				<div class="img">
-					<img src="/upload/{{ serviceModel.modelImg}}" alt="">
-				</div>
-				<p class="detail-title">{{ serviceModel.modelName }}</p>
-				<div class="classify plain">
-					{% for model in serviceModel.classModel.all %}
-					<p><a href="/get/model/articles/{{serviceModel.id}}/{{model.id}}/">{{ model.className}}</a></p>
-					{% endfor %}
-					<div class="arrow"></div>
+
+</div>
+<div class="detail">
+	<div class="am-g am-container" id="detail">
+		{% for serviceModel in allServiceModel %}
+		<div class="detail-box">
+			<div class="img">
+				<img src="/upload/{{ serviceModel.modelImg}}" alt="">
+			</div>
+			<p class="detail-title">{{ serviceModel.modelName }}</p>
+			<div class="classify plain">
+				{% for model in serviceModel.classModel.all %}
+				<p><a href="/get/servicemodel/{{serviceModel.id}}/classmodel/{{model.id}}/">{{ model.className}}</a></p>
+				{% endfor %}
+				<div class="arrow"></div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="am-g am-container pic">
+	{% for work in indexWorks %}
+	{% if forloop.counter < 5%}
+		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+			<div class="view">
+				{% if work.img %}
+				<img src="/upload/{{ work.img }}" alt="">
+				{% else %}
+				<img src="{% static 'img/pic1.jpg' %}" alt="">
+				{% endif %}
+				<div class="mask">
+					<h1></h1>
+					<h1></h1>
+					<p>{{work.title}}</p>
+					<a href="javascript:void(0);" class="mask-btn">Read More</a>
 				</div>
 			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="am-g am-container pic line2">
+		{% for work in indexWorks %}
+		{% if forloop.counter > 4%}
+		<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
+			<div class="view">
+				<img src="/upload/{{work.img}}" alt="">
+				<div class="mask">
+					<h1></h1>
+					<h1></h1>
+					<p>{{work.title}}</p>
+					<a href="javascript:void(0);" class="mask-btn">Read More</a>
+				</div>
+			</div>
+		</div>
+		{% endif%}
+		{% endfor %}
+	</div>
+</div>
+<div class="news">
+	<div class="am-g am-container">
+		<div class="am-u-lg-12">
+			<h1 class="news-title">需求资讯<span class="en-title">/NEWS</span></h1>
+			{% for article in articles %}
+			{% if forloop.counter == 1 or forloop.counter == 3 or forloop.counter == 5 or forloop.counter == 7 %}<div class ="am-g down">{% endif %}
+
+				<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
+					{% if article.img %}
+					<div class="image">
+						<img src=" /upload/{{ article.img }} " alt="">
+					</div>
+					{% else%}
+					<div class="image">
+						<img src=" {% static 'img/index/pic10.jpg'%} " alt="">
+					</div>
+					{% endif %}
+					<div class="text">
+						<h2 class="text-title">
+							<a href="/get/article/{{article.id}}/">{{ article.title}}</a>
+						</h2>
+						<p>{{ article.content|slice:"40" }}......</p>
+					</div>
+				</div>
+				{% if forloop.counter == 2 or forloop.counter == 4 or forloop.counter == 6 or forloop.counter == 8%}</div>{% endif %}
 			{% endfor %}
 		</div>
-		<div class="am-g am-container pic">
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic1.jpg' %}" alt="">
-			</div>
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic2.jpg' %}" alt="">
-			</div>
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic3.jpg' %}" alt="">
-			</div>
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic4.jpg' %}" alt="">
-			</div>
+	</div>
+</div>	
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-register">
+	<div class="am-modal-dialog">
+		<div class="am-modal-hd">
+			<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 		</div>
-		<div class="am-g am-container pic line2">
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic5.jpg' %}" alt="">
-			</div>
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic6.jpg' %}" alt="">
-			</div>
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic7.jpg' %}" alt="">
-			</div>
-			<div class="am-u-lg-3 am-u-md-6 am-u-sm-6">
-				<img src="{% static 'img/index/pic8.jpg' %}" alt="">
-			</div>
+		<div class="am-modal-bd">
+			{% include 'parts/registerform.html' %}
 		</div>
 	</div>
-	<div class="news">
-		<div class="am-g am-container">
-			<div class="am-u-lg-12">
-				<h1 class="news-title">需求资讯<span class="en-title">/NEWS</span></h1>
-				<div class="am-g">
-					{% for article in articles %}
-					<div class="am-u-lg-6 am-u-md-6 am-u-sm-12 news-box">
-						{% if article.img %}
-						<div class="image">
-							<img src=" /upload/{{ article.img }} " alt="">
-						</div>
-						{% else%}
-						<div class="image">
-							<img src=" {% static 'img/index/pic10.jpg'%} " alt="">
-						</div>
-						{% endif %}
-						<div class="text">
-							<h2 class="text-title"><a href="/get/article/article/{{article.id}}/">{{ article.title}}</a></h2>
-							<p>{{ article.content|slice:"40" }}......</p>
-						</div>
-					</div>
-					{% endfor %}
-				</div>
-			</div>
+</div>
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-signup">
+	<div class="am-modal-dialog">
+		<div class="am-modal-hd">
+			<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+		</div>
+		<div class="am-modal-bd">
+			{% include 'parts/loginbox.html'%}
 		</div>
 	</div>
-		<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-register">
-		<div class="am-modal-dialog">
-			<div class="am-modal-hd">
-				<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-			</div>
-			<div class="am-modal-bd">
-					{% include 'parts/registerform.html' %}
-			</div>
-		</div>
-	</div>
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-signup">
-		<div class="am-modal-dialog">
-			<div class="am-modal-hd">
-				<a href="javascript:void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-			</div>
-			<div class="am-modal-bd">
-				{% include 'parts/loginbox.html'%}
-			</div>
-		</div>
-	</div>
-	{% endblock%}
-	{% block footer%}
-		{% include 'parts/footer.html'%}
-	{% endblock %}
+</div>
+{% endblock%}
+{% block footer%}
+{% include 'parts/footer.html'%}
+{% endblock %}
