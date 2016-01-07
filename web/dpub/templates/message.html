@@ -111,10 +111,10 @@ body {
 			<div class="alert-body"> 		
 				<div id="js-alert-head" class="alert-head"></div> 		
 				<div class="alert-concent"> 			
-					<p>数字资源加工网</p> 			
+					<p>易数网</p> 			
 					<p>只做优质资源</p> 		
 				</div> 		
-				<a id="js-alert-btn" class="alert-btn" href="{% url 'userAdd'%}">立即前往注册</a> 	
+				<a id="js-alert-btn" class="alert-btn" href="{% url 'userAdd'%}">立即注册</a> 	
 			</div> 	<div class="alert-footer clearfix"> 		
 			<!--	<svg width="46px" height="42px" class="alert-footer-icon"> 			
 					<circle fill-rule="evenodd" clip-rule="evenodd" fill="#7B7B7B" stroke="#DEDFE0" stroke-width="2" stroke-miterlimit="10" cx="21.917" cy="21.25" r="17"/> 			
@@ -145,7 +145,7 @@ function alertSet(e) {
 	970);
 } 
 		</script> 
-		<script>alertSet('{{ message }}');</script>  
+		<script>alertSet('{{message}}');</script>  
 	</body>
 </html>
 

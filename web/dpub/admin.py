@@ -1,4 +1,4 @@
-#coding:utf-8#
+#coding:utf-8
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -46,7 +46,7 @@ class UserAdmin(UserAdmin):
     inlines = [ExuserInline,]
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title','user','insertDate','endDate')
+    list_display = ('title','user','insertDate','endDate','boolWorks')
     search_fields = ['boolWorks']
 
 

@@ -12,7 +12,7 @@
 		<tr>
 			<td>
 				<p>
-				<em class="list-task-reward">￥{{article.price}}</em>	
+				<em class="list-task-reward">{% if article.price%}￥{{article.price}}{%endif%}</em>	
 				</p>
 			</td>
 			<td>

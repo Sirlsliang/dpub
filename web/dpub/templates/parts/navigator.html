@@ -85,10 +85,13 @@
 									</h3>
 								</div>
 								<div class="send-req user-info">
-									<a href="{% url 'articleAdd' %}"><span class="am-icon-send"></span> 发布需求</a>
+									<a href="/manage/article/add/0/"><span class="am-icon-send"></span> 发布需求</a>
+								</div>
+								<div class="send-req user-info">
+									<a href="/manage/article/add/1/"><span class="am-icon-send"></span> 发布作品</a>
 								</div>
 								<div class="account-set user-info">
-									<a href="#"><span class="am-icon-cog"></span> 帐号设置</a>
+									<a href="{% url 'userManage' %}"><span class="am-icon-cog"></span> 帐号设置</a>
 								</div>
 								<div class="exit user-info">
 									<a href="{% url 'userLogout'%}"><span class="am-icon-reply"></span> 退出帐号</a>

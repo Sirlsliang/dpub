@@ -7,6 +7,9 @@ urlpatterns =[
     url(r"^contactus",ContactUsView.as_view(),name="contactUsView"),
     url(r"^classmodel/(?P<modelId>[0-9]+)/$",classModel),
 
+    url(r"^check/(?P<username>\w{3,30})/$",checkUserName),
+
+
     url(r"^servicemodel/(?P<serviceModelId>[0-9]+)/$",serviceModelArticles),
     url(r"^servicemodel/(?P<serviceModelId>[0-9]+)/classmodel/(?P<classModelId>[0-9]+)/$",classModelArticles),
 

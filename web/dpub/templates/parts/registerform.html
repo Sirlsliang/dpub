@@ -1,47 +1,79 @@
+<script>
+function checkTheUserName(id){
+	username = $("#id_username").val();
+	if (username != ""){
+		url = "/get/check/"+username+"/";
+	$.get(
+			url,function(data){
+				if (data == 1){
+					$("#unamespan").html("<ul><li>该用户已注册</li></ul>");	
+				}else{
+					$("#unamespan").html("");	
+				}
+			}
+		 );
+	}
+}	
+</script>
 <div class="register-form">
-<form action="{% url 'userAdd'%}" method="POST" id="registerForm" class="am-form" data-am-validator>
+	<form action="{% url 'userAdd'%}" method="POST" id="registerForm" class="am-form" data-am-validator>
 	{% csrf_token %}
 	<fieldset>
-		<legend>注册账号，免费加入数字网</legend>
+		<legend>注册账号，免费加入易数网</legend>
 		<div class="am-form-group">
-			<label for="username">帐号</label>
-			<input type="text" id="username" name="username" minlength="3" placeholder="输入用户名（至少三个字符）" required/>
+			<label for="{{userForm.username.id_for_label}}">帐号</label>
+			{{userForm.username}}
+			<span id="unamespan">
+			{{userForm.username.errors}}
+			</span>
 		</div>
 		<div class="am-form-group">
-			<label for="password">密码</label>
-			<input type="password" id="password" name="password" placeholder="请输入六位以上的数字字母组合" pattern="^\w{6,}$" data-foolish-msg="请填写密码" required/>
+			<label for="{{userForm.password.id_for_label}}">密码</label>
+			{{userForm.password}}
+			<span>
+				{{userForm.password.errors}}
+			</span>
 		</div>
 		<div class="am-form-group">
-			<label for="password2">确认密码</label>
-			<input type="password" id="password2" name="conpassword" placeholder="请重复上面的密码" onblur="checkPassword(password,password2)" data-equal-to="#password" required/>
+			<label for="{{userForm.conpassword.id_for_label}}">确认密码</label>
+			{{userForm.conpassword}}
+			<span>
+				{{userForm.conpassword.errors}}
+			</span>
 		</div>
 		<div class="am-form-group">
-			<label for="email">邮箱</label>
-			<input type="email" id="email" name="email" placeholder="输入邮箱" required/>
+			<label for="{{userForm.email.id_for_label}}">邮箱</label>
+			{{userForm.email}}
+			<span>
+				{{userForm.email.errors}}
+			</span>
 		</div>
 		<div class="am-form-group">
-			<label>性别：</label>
-			<label class="am-radio-inline">
-				<input type="radio" value="0" name="sex" data-am-ucheck required> 男
-			</label>
-			<label class="am-radio-inline">
-				<input type="radio" value="1" name="sex" data-am-ucheck checked> 女
-			</label>
+			<label for="{{userForm.sex.id_for_label}}">性别：</label>
+			{{userForm.sex}}
+			<span>
+				{{userForm.sex.errors}}
+			</span>
 		</div>
 		<div class="am-form-group">
-			<label for="phonenum">电话号码</label>
-			<input type="text" id="phonenum" name="phonenum" placeholder="输入您的电话号码" required/>
+			<label for="{{userForm.phonenum.id_for_label}}">电话号码</label>
+			{{userForm.phonenum}}
+			<input type="hidden" name="date_joined">
+			<span>
+				{{userForm.phonenum.errors}}
+			</span>
 		</div>
-		<input type="hidden" name="date_joined"/>
-
 		<div class="am-form-group">
-			<label for="company">公司或学校名称</label>
-			<input type="text" id="companyname" name="comanyname" placeholder="输入您的单位名称" />
+			<label for="{{userForm.companyname.id_for_label}}">公司或学校名称</label>
+			{{userForm.companyname}}
+			<span>
+				{{userForm.companyname.errors}}
+			</span>
 		</div>
 		<button class="am-btn am-btn-primary" type="submit" id="registerButton">确认注册</button>
 		<div class="provision">
-			我已阅读并同意
-			<a href="#" target="_blank">数字网服务协议</a>
+				我已阅读并同意
+			<a href="#" target="_blank">易数网服务协议</a>
 		</div>
 	</fieldset>
 </form>

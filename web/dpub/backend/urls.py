@@ -12,7 +12,7 @@ urlpatterns =[
     url(r'^user/manage',UserManage.as_view(),name='userManage'),
     url(r'^user/password',changePassword,name="userPassword"),
     url(r'^manage/$',Manage.as_view(),name='backendManage'),
-    url(r'^article/add$',ArticleAdd.as_view(),name='articleAdd'),       
+    url(r'^article/add/(?P<boolWorks>[0-1]+)/$',articleAdd),       
     url(r'^article/(?P<boolWorks>[0-1]+)/(?P<page>[0-9]+)/$',articlesManage,name='articlesManage'),
     url(r'^article/update/(?P<pk>[0-9]+)/$',articleUpdate,name="articleUpdate"),
     url(r'^article/del/(?P<pk>[0-9]+)/$',articleDel,name="articleDel"),

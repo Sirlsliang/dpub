@@ -33,38 +33,28 @@
 									<input type="text" id="username" name="username" placeholder="" class="input" value="{{ user.username}}">
 								</div>
 								<div class="am-form-group">
-									<label for="username">昵称</label>
-									<input type="text" id="nickname" name="nickname" placeholder="" class="input" value="{% if user.exuser.nickname%}{{ user.exuser.nickname }}{% endif%}">
+									<label for="{{exUserForm.nickname.id_for_label}}">昵称</label>
+									{{exUserForm.nickname}}
+									<span>{{esUserForm.nickname.errors}}</span>
 								</div>
 								<div class="am-form-group">
-									<label>性别</label>
-									{% if user.exuser.sex > 0 %}
-									<label class="am-radio-inline">
-										<input type="radio" value="1" name="sex" data-am-ucheck checked> 女
-									</label>
-									<label class="am-radio-inline">
-										<input type="radio" value="0" name="sex" data-am-ucheck > 男
-									</label>
-									{% else%}
-									<label class="am-radio-inline">
-										<input type="radio" value="1" name="sex" data-am-ucheck> 女
-									</label>
-									<label class="am-radio-inline">
-										<input type="radio" name="sex" value="0" data-am-ucheck checked> 男
-									</label>
-									{% endif %}
+									<label for="{{exUserForm.sex.id_for_label}}">性别</label>
+									{{exUserForm.sex}}
+									<span>{{esUserForm.sex.errors}}</span>
 								</div>
 								<div class="am-form-group">
 									<label for="username">邮箱</label>
 									<input type="text" id="email" placeholder="" name="email" class="input" value="{{ user.email}}">
 								</div>
 								<div class="am-form-group">
-									<label for="username">电话</label>
-									<input type="text" id="phonenum" placeholder="" class="input" name="phonenum" value="{% if user.exuser.phonenum%}{{ user.exuser.phonenum}}{% endif %}">
+									<label for="{{exUserForm.phonenum.id_for_label}}">电话</label>
+									{{exUserForm.phonenum}}
+									<span>{{esUserForm.phonenum.errors}}</span>
 								</div>
 								<div class="am-form-group">
-									<label for="username">所在公司</label>
-									<input type="text" id="companyname" placeholder="" name="companyname" class="input" value="{% if user.exuser.companyname%}{{ user.exuser.companyname}}{% endif%}">
+									<label for="{{exUserForm.companyname.id_for_label}}">所在公司</label>
+									{{exUserForm.companyname}}
+									<span>{{esUserForm.companyname.errors}}</span>
 								</div>
 								<button class="am-btn am-btn-primary" type="submit" id="save">保存</button>
 							</fieldset>

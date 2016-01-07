@@ -8,6 +8,7 @@
 	<meta name="author" content="rockhentai">
 	<link rel="icon" href="{% static 'img/logo.png'%}">
 	<title>注册</title>
+	<script src="{% static 'js/jquery.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/index/index.css' %}">
 	<style>
@@ -58,25 +59,45 @@
 
 	.register-form {
 		padding:30px 20px 10px 20px;
-		text-align: center;
+		text-align: left;
 		/*box-shadow: 5px 5px */
 	}
+	.register-form input{
+		margin-bottom:10px;
+	}
 
+	.register-form ul{
+		text-align:left;
+		font-size:15px;
+		color:#f00;
+	}
+
+
+
+	.register-form ul li{
+		text-align:left;
+
+	}
 	.slogan {
 		margin-top: 50px;
 		text-align: center;
 		color: #D0D0D0;
 	}
+	#registerButton{
+		margin-left:190px;
+	
+	}
 	</style>
 </head>
 <body>
 <div class="header">
-		<a href="index.html" class="logo">
+		<a href="/index.html" class="logo">
 			<img src="{% static 'img/biaozhi1.png' %}" alt="">
 			<p>易数网 Make it easy</p>
 		</a>
 	</div>
 	<div class="content-box">
+	
 		{% include "parts/registerform.html"%}
 	</div>
 	<div class="footer">

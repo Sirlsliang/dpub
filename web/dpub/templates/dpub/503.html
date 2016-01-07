@@ -1,3 +1,4 @@
+{% load staticfiles%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="author" content="rockhentai">
-	<link rel="icon" href="img/logo.png">
+	<link rel="icon" href="{% static 'img/logo.png' %}">
 	<title>503</title>
-	<link rel="stylesheet" href="css/amazeui.min.css"/>
+	<link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
 	<style>
 	.notFound {
 		margin-top: 50px;
@@ -34,7 +35,7 @@
 	<div class="notFound">
 		<div class="am-g am-container">
 			<div class="am-u-lg-8 am-u-lg-centered am-u-md-8 am-u-md-centered">
-				<img src="img/503.jpg" alt="">
+				<img src="{% static 'img/503.jpg' %}" alt="">
 				<h1>Sorry~服务器内部出错了</h1>
 			</div>
 		</div>

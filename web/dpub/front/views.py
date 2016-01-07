@@ -121,6 +121,15 @@ def classModel(request,modelId):
     classModels = ClassModel.objects.filter(modelName=modelId)
     return render(request,'ajax/classModel.html',{"classModels":classModels})
 
+def checkUserName(request,username):
+    uname = username.strip()
+    try:
+        u = User.objects.get(username=uname)
+    except Exception as e:
+        return HttpResponse("0")
+    else:
+        return HttpResponse("1")
+
 def page_not_found(request):
     return render(request,'dpub/404.html')
 

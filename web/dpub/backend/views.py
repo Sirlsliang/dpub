@@ -19,7 +19,7 @@ from dpub.forms import *
 
 from dpub.conf import *
 class LoginProtectedView(TemplateView): 
-    @method_decorator(login_required(redirect_field_name='next',login_url='/manage/user/login'))
+    @method_decorator(login_required(redirect_field_name='next',login_url='/manage/user/login/'))
     def dispatch(self,*args,**kwargs):
         return super(LoginProtectedView,self).dispatch(*args,**kwargs)
 
@@ -71,32 +71,28 @@ def changePassword(request):
 
 class UserManage(LoginProtectedView):
     def get(self,request):
-        return render(request,"dpub/user-modify.html",{'user':request.user})
+	exUserForm = ExUserForm(instance=request.user.exuser)
+    	allServiceModel = ServiceModel.objects.all()
+        return render(request,"dpub/user-modify.html",{'exUserForm':exUserForm,'user':request.user,'allServiceModel':allServiceModel})
 
     def post(self,request):
         errorText =""
         url = "/manage/user/add/"
         user = request.user
-        exUserForm = ExUserForm(request.POST)
-        try:
-            if exUserForm.is_valid():
-                if exUserForm.cleaned_data['nickname']:
-                    user.exuser.nickname = exUserForm.cleaned_data['nickname']
-                if request.POST['sex']:
-                    user.exuser.sex = request.POST['sex']
-                if exUserForm.cleaned_data['phonenum']:
-                    user.exuser.phonenum = exUserForm.cleaned_data['phonenum']
-                if exUserForm.cleaned_data['companyname']:
-                    user.exuser.companyname = exUserForm.cleaned_data['companyname']
+	exUserForm = ExUserForm(request.POST)
+        allServiceModel = ServiceModel.objects.all()
+        if exUserForm.is_valid():
+            exUser = exUserForm.save(commit=False)
+            exUser.id = user.exuser.id
+            user.exuser = exUser
             if request.POST['email']:
-                user.email = request.POST['email']
+                user.email = request.POST['email'].strip()
             if request.POST['username']:
-                user.username = request.POST['username']
+                user.username = request.POST['username'].strip()
             user.exuser.save()
             user.save()
-            errorText = "修改成功"
-        except Exception as e:
-            errorText ="出错啦".joined(e)
+        else:
+            return render(request,"dpub/user-modify.html",{'exUserForm':exUserForm,'user':request.user,'allServiceModel':allServiceModel})
         return render(request,'message.html',{'message':'修改成功','url':'/manage/manage/'})
         
 
@@ -104,63 +100,71 @@ class UserAdd(View):
     def post(self,request):
         errorText =""
         url = "/manage/user/add/"
-        conpassword = request.POST['conpassword']
-        exUserForm = ExUserForm(request.POST)
-        userForm = UserForm(request.POST)
-        if exUserForm.is_valid() and userForm.is_valid():
-            if conpassword == userForm.cleaned_data['password']:
+        userForm =MyUserForm(request.POST)
+        if userForm.is_valid():
+            password = userForm.cleaned_data['password']
+            conpassword = userForm.cleaned_data['conpassword']
+            if password == conpassword:
                 try:
                     username = userForm.cleaned_data['username']
-                    password = userForm.cleaned_data['password']
                     email = userForm.cleaned_data['email']
                     user = User.objects.create_user(username,email,password)
                     customer = Group.objects.get(name='customer')
                     user.groups.add(customer)
-                    exUser = exUserForm.save(commit=False)
-                    exUser.user = user
+		    sex = userForm.cleaned_data['sex']
+		    phonenum = userForm.cleaned_data['phonenum']
+		    companyname = userForm.cleaned_data['companyname']
+                    exUser= Exuser(user=user,sex=sex,phonenum=phonenum,companyname=companyname)
                     exUser.save()
                     user.save()
-                    errorText = "注册成功"
-                    url = "/manage/user/login/"
+                    errorText = " 恭喜您，注册成功"
+		    url = "/"
                 except Exception as e:
                     errorText = e
             else:
-                errorText ="两次输入密码不一致"
+                errorText ="两次密码输入不一致"
+            return render(request,'message.html',{'message':errorText,'url':url})
         else:
-            errorText = exUserForm.errors.join(userForm.errors)
-        return render(request,'message.html',{'message':errorText,'url':url})
+            return render(request,'dpub/register.html',{'userForm':userForm,'url':url})
 
     def get(self,request):
-        return render(request,'dpub/register.html')
+        userForm    =   MyUserForm()
+        return render(request,'dpub/register.html',{'userForm':userForm})
 
 class Manage(LoginProtectedView):
     def get(self,request):
         allServiceModel = ServiceModel.objects.all()
         return render(request,'dpub/manage.html',{'allServiceModel':allServiceModel,})
 
-
-class ArticleAdd(LoginProtectedView): 
-
-    def get(self,request):
-        allServiceModel = ServiceModel.objects.all()
-        articleForm = ArticleForm()
-        return render(request,'dpub/release.html',{'allServiceModel':allServiceModel,'articleForm':articleForm,})
-
-    def post(self,request):
-        user = request.user
-        articleForm = ArticleForm(request.POST,request.FILES)
-        if articleForm.is_valid():
-            article = articleForm.save(commit=False)
-            if not article.usernickname:
-                article.usernickname = user.exuser.nickname
-            if not article.phonenum:
-                article.phonenum = user.exuser.phonenum
-            if not article.email:
-                article.email = user.email
-            article.user = request.user
-            article.save()
-            return render(request,'message.html',{'message':'添加成功','url':'/manage/manage/'})
-        return render(request,'message.html',{'message':'访问出错'.join(articleForm.errors),'url':'/manage/manage/'})
+def articleAdd(request,boolWorks): 
+	var = None
+	if boolWorks == '0':
+		var = '需求'
+	elif boolWorks == '1':
+		var = '作品'
+	allServiceModel = ServiceModel.objects.all()
+	if request.method == "GET":
+		articleForm = ArticleForm()
+		return render(request,'dpub/release.html',{'var':var,'articleForm':articleForm,'allServiceModel':allServiceModel,'boolWorks':boolWorks})
+	
+	if request.method == "POST":
+		user = request.user
+		articleForm = ArticleForm(request.POST,request.FILES)
+		if articleForm.is_valid():
+			article = articleForm.save(commit=False)
+			if not article.usernickname:
+				article.usernickname = user.exuser.nickname
+			if not article.phonenum:
+				article.phonenum = user.exuser.phonenum
+			if not article.email:
+				article.email = user.email
+			if not article.companyname:
+				article.companyname = user.exuser.companyname
+			article.user = request.user
+			article.save()
+			return HttpResponseRedirect('/manage/manage/')
+		else:
+			return render(request,'dpub/release.html',{'articleForm':articleForm,'allServiceModel':allServiceModel,'var':var,'boolWorks':boolWorks})
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articlesManage(request,boolWorks,page):
@@ -180,20 +184,39 @@ def articlesManage(request,boolWorks,page):
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articleUpdate(request,pk):
-    if request.method == "GET":
-        article = Article.objects.get(pk=pk)
-        allServiceModel = ServiceModel.objects.all()
-        return render(request,'dpub/release-modify.html',{'article':article,"allServiceModel":allServiceModel})
-    if request.method == "POST":
-        user = request.user
-        articleForm = ArticleForm(request.POST,request.FILES)
-        if articleForm.is_valid():
-            article = articleForm.save(commit=False)
-            article.id = pk
-            article.user = user
-            article.save()
-            return render(request,'message.html',{'message':'修改成功','url':'/manage/manage/'})
-        return HttpResponse(articleForm.errors)
+	article = Article.objects.get(pk=pk)
+	boolWorks = article.boolWorks
+	var = None
+	if boolWorks == '0':
+		var = "需求"
+	elif boolWorks == '1':
+		var = "作品"
+	allServiceModel = ServiceModel.objects.all()
+	if request.method == "GET":
+		articleForm = ArticleForm(instance=article)
+		return render(request,'dpub/release-modify.html',{'allServiceModel':allServiceModel,'pk':pk,'articleForm':articleForm,'boolWorks':boolWorks,'var':var})
+	
+	if request.method == "POST":
+		user = request.user
+		articleForm = ArticleForm(request.POST,request.FILES)
+		if articleForm.is_valid():
+			art = articleForm.save(commit=False)
+			article.title   = art.title
+			article.content = art.content
+			article.servicemodel = art.servicemodel
+			article.classmodel   = art.classmodel
+			if art.img:
+				article.img	     = art.img
+			if article.boolWorks == '0':
+				article.endDate = art.endDate
+			article.price = art.price
+			article.companyname = art.companyname
+			article.usernickname = art.usernickname
+			article.email = art.email
+			article.phonenum = art.phonenum
+			article.save()
+			return render(request,'message.html',{'message':'修改成功','url':'/manage/manage/'})
+		return render(request,'dpub/release-modify.html',{'allServiceModel':allServiceModel,'pk':pk,"articleForm":articleForm,'boolWorks':boolWorks,'var':var})
 
 @login_required(redirect_field_name='next',login_url='/manage/user/login')
 def articleDel(request,pk):

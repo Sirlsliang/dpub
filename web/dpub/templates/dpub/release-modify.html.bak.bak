@@ -1,0 +1,128 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title %} 发布需求{% endblock %}
+{% block navigator %}{% include "parts/navigator.html"%}{% endblock%}
+{% block content %}
+	<div class="s-title">
+		<div class="am-g am-container">
+			<div class="am-u-lg-12" style="position:relative;">
+				<h1 class="server-title">需求发布</h1>
+			</div>
+		</div>
+	</div>
+	<div class="outer user">
+		<form action="/manage/article/update/{{article.id}}/" method="POST" id="releaseForm" class="am-form" enctype="multipart/form-data">
+			{% csrf_token %}
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title orange">
+					需求详情
+				</div>
+				<div class="content-box">
+					<div class="release-info">
+						<div class="am-form-group">
+							<label for="{{articleForm.title.id_for_label">简单描述</label>
+							{{articleForm.title}}
+							<p> {{articleForm.title.errors}}</p>
+						</div>
+						<div class="am-form-group">
+							<label for="{{articleForm.boolWorks.id_for_label}}" class="fleft">
+								需求分类</label>
+								{{articleForm.boolWorks}}
+							
+							<div class="cleanBox"></div>
+						</div>
+						<script>
+							$('#id_boolWorks').change(function(){
+								if($(this).val()== 0){
+									$('#timeAndPrice').show();
+								}else{
+									$('#timeAndPrice').hide();
+								}
+							})
+							
+							function getTheClassModel(){
+								id =$("#category-selected").val()
+								selBox = $("#classSelect")
+								$.get(
+									'/get/classmodel/'+id+'/',
+									function (data){
+										selBox.html(data);
+									}
+								);
+
+							
+							}
+						</script>
+						<div class="am-form-group">
+							<label for="{{articleForm.servicemodel.id_for_label}}">选择类别</label>
+							{{articleForm.servicemodel}}
+							{{articleForm.classmodel}}
+						</div>
+						<div class="am-form-group">
+							<label for="{{articleForm.content.id_for_label}}">制作要求</label>
+							{{articleForm.content}}
+							<p> {{articleForm.content.errors}}</p>
+						</div>
+						<div class="am-form-group am-form-file des-input">
+	  					
+							{{articleForm.img}}
+	  						<div id="file-list"></div>
+						</div>
+						<div id="timeAndPrice" >
+							<div class="am-form-group">
+								<label for="{{articleForm.endDate.id_for_label}}">完成时间</label>
+								{{articleForm.endDate}}
+							</div>
+						</div>
+							<div class="am-form-group">
+								<label for="{{articleFrom.price.id_for_label}}">设置价格</label>
+								{{articleForm.price}}
+							&nbsp;	元
+							<p> {{articleForm.price.errors}}</p>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-container">
+			<div class="am-u-lg-12 content-wrapper">
+				<div class="content-title">
+					联系方式
+				</div>
+				<div class="content-box">
+					<div class="release-info">
+						<div class="am-form-group">
+							<label for="{{articleForm.companyname.id_for_label}}">单位名称</label>
+							{{articleForm.companyname}}
+							<p> {{articleForm.companyname.errors}}</p>
+						</div>
+						<div class="am-form-group">
+							<label for="{{articleForm.usernickname.id_for_label}}">姓名</label>
+							{{articleForm.usernickname}}
+							<p> {{articleForm.usernickname.errors}}</p>
+						</div>
+						<div class="am-form-group">
+							<label for="{{articleForm.phonenum.id_for_label}}">电话</label>
+							{{articleForm.phonenum}}
+							<p> {{articleForm.phonenum.errors}}</p>
+						</div>
+						<div class="am-form-group">
+							<label for="{{articleForm.email.id_for_label}}">电子邮件</label>
+							{{articleForm.email}}
+							<p> {{articleForm.email.errors}}</p>
+						</div>
+						<div class="am-form-group" id="release">
+							<button type="submit" id="submit-btn" class="button-3d button-primary"><span class="am-icon-rocket"></span> 发布</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	{%  endblock %}
+	{% block footer %}
+		{% include "parts/footer.html"%}
+	{% endblock %}
+	

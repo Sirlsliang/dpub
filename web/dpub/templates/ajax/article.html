@@ -1,4 +1,4 @@
-<a class=" btn add-btn" href="{% url 'articleAdd'%}"></a>
+<a class="{% if boolWorks == '0'%}btn add-btn{% else %}btn work-btn{% endif %}" href="/manage/article/add/{{boolWorks}}/"></a>
 <table class="am-table am-table-striped am-table-hover">
 <thead>
 	<tr>
@@ -6,7 +6,9 @@
 		<td>价格(元)</td>
 		<td>描述</td>
 		<td>开始日期</td>
-		<td>结束日期</td>
+	{% if boolWorks == '0' %}
+	<td>结束日期</td>
+	{%endif%}
 		<td colspan="2">操作</td>
 	</tr>
 </thead>
@@ -14,10 +16,12 @@
 	{%  for article in articles%}
 	<tr>
 		<td>{{ forloop.counter }}</td>
-		<td>{{ article.price }}</td>
+		<td>{{ article.price|default:" " }}</td>
 		<td>{{ article.title }}</td>
 		<td>{{ article.insertDate|date:'Y-m-d' }}</td>
+		{% if boolWorks == '0'%}
 		<td>{{ article.endDate|date:'Y-m-d'}}</td>
+		{% endif %}
 		<td><a href="/manage/article/update/{{ article.id}}/">修改</a></td>
 		<td><a href="javascript:void(0);" onclick="articleDel({{ article.id }})">删除</a></td>
 	</tr>

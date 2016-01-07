@@ -20,6 +20,9 @@ ul,li {
 	height: 40px;
 	padding-bottom: 5px;
 }
+.am-topbar .am-btn-primary{
+	color:#fff;
+}
 
 @media (max-width: 808px) {
 	.icon-text {
@@ -393,12 +396,26 @@ ul,li {
 }
 
 .am-form-group {
-	text-align: left;
+	text-align:left;
 	vertical-align: middle;
+	line-height:40px;
+}
+.am-form-group label ul li{
+	/*float:left;*/
+	display:inline;
+}
+.cleanBox{
+	clear:both;
+}
+.fleft{
+	float:left;
 }
 
 .am-form input[type=text],.am-form input[type=email],.am-form input[type=password],.am-form textarea {
 	border-radius: 5px;
+}
+#id_img{
+	height:40px;
 }
 
 #vld-tooltip {
@@ -926,7 +943,7 @@ label {
 
 .basic-info .info-block {
 	margin:0;
-	width: 300px;
+	width: 400px;
 }
 
 .basic-info .info-block li {
@@ -962,6 +979,10 @@ label {
 
 .content-box .add-btn {
 	background: url(/static/img/add-btn.png) no-repeat;
+	right: -13px;
+}
+.content-box .work-btn {
+	background: url(/static/img/work-btn.png) no-repeat;
 	right: -13px;
 }
 
